@@ -4,7 +4,7 @@ metadata:
   name: wordpress-ingress
 spec:
   rules:
-    - host: ec2-34-216-146-130.us-west-2.compute.amazonaws.com
+    - host: ec2-34-213-183-217.us-west-2.compute.amazonaws.com
       http:
         paths:
           - path: /
