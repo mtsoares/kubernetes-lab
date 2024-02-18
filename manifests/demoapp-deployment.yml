@@ -5,7 +5,7 @@ metadata:
   labels:
     app: demoapp-deployment
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: demoapp-pod
@@ -35,3 +35,11 @@ spec:
           value: demoappdb
         ports:
         - containerPort: 80
+        volumeMounts:
+        - mountPath: /var/www/html/index.html
+          name: demoapp-index
+          subPath: index.html
+      volumes:
+      - name: demoapp-index
+        configMap:
+          name: demoapp-newindex-configmap
