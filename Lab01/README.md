@@ -3,12 +3,33 @@
 On this lab, we will be installing a simple single-node Kubenetes cluster using K3s distribution. For more details about K3s, check the official documentation: https://k3s.io/ (not mandatory for the lab).
 
 Information needed from your instructor:
-* IP and DNS hostname for your lab instance.
+* IP and FQDN for your lab instance.
 * SSH private key allowing SSH connection to the lab instance.
 * Username to access the instance. This lab guide assumes the username is "ubuntu".
 * Database server name and admin password. 
 
+The manual uses "nano" to edit files, but feel free to use any other text editor of choice.
+
 Follow the instructions below for the installation and configuration.
+
+## Preparation
+
+Before installing, a specific non-default configuration is needed to avoid certificate issues on future labs.
+
+Edit the following file (as root): 
+
+```bash
+sudo nano /etc/rancher/k3s/config.yaml 
+```
+
+Add the below information on it, replacing <FQDN> by the lab VM FQDN provided by the instructor:
+
+```yaml
+tls-san:
+  - "<FQDN>"
+```
+
+Save the file (CTRL+O) and exit (CTRL+X).
 
 ## Installation
 
