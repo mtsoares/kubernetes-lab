@@ -1,6 +1,12 @@
-# Foobar
+# Lab 01
 
-Foobar is a Python library for dealing with word pluralization.
+On this lab, we will be installing a simple single-node Kubenetes cluster using K3s distribution. For more details about K3s, check the official documentation: https://k3s.io/ (not mandatory for the lab).
+
+Information needed from your instructor:
+* IP and DNS hostname for your lab instance
+* SSH private key allowing SSH connection to the lab instance
+
+Follow the instructions below for the installation and configuration.
 
 ## Installation
 
