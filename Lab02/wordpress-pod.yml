@@ -8,7 +8,7 @@ metadata:
 spec:
   containers:
   - name: wordpress-container
-    image: wordpress:latest
+    image: <REPLACE THIS BY THE LATEST OFFICIAL WORDPRESS IMAGE VERSION>
     env:
     ## Fill in below all variable names and values for a working Wordpress deployment. Each varibla should have a name/value pair.
     - name: <REPLACE THIS BY THE NEEDED VARIABLE NAME>
