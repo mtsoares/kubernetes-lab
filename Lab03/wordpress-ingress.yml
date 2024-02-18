@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: <PROVIDE A NAME FOR THE INGRESS>
+spec:
+  rules:
+    - host: <WORDPRESS FQDN SPECIFIC FOR THE STUDENT>
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: <NAME OF THE SERVICE REVIOUSLY CREATED>
+                port:
+                  number: <PORT OF THE SERVICE PREVIOUSLY CREATED>
