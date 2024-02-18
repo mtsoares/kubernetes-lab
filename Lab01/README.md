@@ -32,44 +32,40 @@ Now it is needed to set the correct environment variable so kubectl knows what c
 
 ```bash
 export KUBECONFIG=~/.kube/config
-...
+```
 
 Test if it is possible to check cluster information:
 
 ```bash
 kubectl get nodes
-...
+```
 
 The next command will persist the KUBECONFIG environment variable so next time the "ubuntu" user logs in kubectl will still work:
 
 ```bash
 echo -e "KUBECONFIG=/home/ubuntu/.kube/config" | sudo tee -a /etc/environment
-...
-
-
-
-```bash
-export KUBECONFIG=~/.kube/config
-...
-
-## Usage
-
-```python
-import foobar
-
-# returns 'words'
-foobar.pluralize('word')
-
-# returns 'geese'
-foobar.pluralize('goose')
-
-# returns 'phenomenon'
-foobar.singularize('phenomena')
 ```
 
-## Contributing
+Execute each one of the following commands and analyze the output:
 
-Pull requests are welcome. For major changes, please open an issue first
-to discuss what you would like to change.
+```bash
+kubectl cluster-info
+kubectl get nodes -o wide
+kubectl get namespaces
+kubectl get services --all-namespaces
+kubectl get pods -o wide --all-namespaces
+```
 
-Please make sure to update tests as appropriate.
+Using a txt file on your own computer answer the following (as the instructor if you are not sure about any question):
+
+* How many namespaces are in the cluster?
+* What namespace have more pods on it?
+* Is the cluster using traefik or nginx as ingress controller?
+* How many nodes are in the cluster?
+* What are the node names? 
+
+## Challenge
+
+Using the information collected so far, try to configure your own personal computer to acess the cluster you have just installed using kubectl. If needed, as your instructor for assistance. Some references that may help:
+
+* https://kubernetes.io/docs/tasks/tools/
