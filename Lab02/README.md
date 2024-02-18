@@ -1,6 +1,6 @@
 # Lab 02
 
-In this lab, a Pod will be created with access to a MySQL database, enabling Worpress to run successfully.
+In this lab, a sample Pod and a Wordpress Pod will be created with access to a MySQL database, enabling Worpress to run successfully.
 
 ## Create a simple pod
 
@@ -80,6 +80,13 @@ Ask your instructor for the following information:
 
 This information will be used on the subsequent labs.
 
+Create a namespace for the wordpress implementation and set it as the current namespace:
+
+```bash
+kubectl create namespace wordpress-apps
+kubectl config set-context --current --namespace=wordpress-apps
+```
+
 ## Creating a wordpress pod
 
 Access Lab02 folder containing some helper files:
@@ -88,30 +95,10 @@ Access Lab02 folder containing some helper files:
 cd ~/kubernetes-lab/Lab02
 ```
 
+Edit the wordpress-pod.yml file adding the required information on the file. Once done, apply the create file and check if the pod started correctly by:
 
-Use the package manager [pip](https://pip.pypa.io/en/stable/) to install foobar.
+* Getting all the pods on the current namespace wordpress-apps and checking the status
+* Checking the logs for the created pod.
+(Use the commands already used on previous exercises)
 
-pip install foobar
-```
-
-## Usage
-
-```python
-import foobar
-
-# returns 'words'
-foobar.pluralize('word')
-
-# returns 'geese'
-foobar.pluralize('goose')
-
-# returns 'phenomenon'
-foobar.singularize('phenomena')
-```
-
-## Contributing
-
-Pull requests are welcome. For major changes, please open an issue first
-to discuss what you would like to change.
-
-Please make sure to update tests as appropriate.
+If the pod is not starting or is having an error, review the configuration and ask the instructor for assistance if the problem persists.
