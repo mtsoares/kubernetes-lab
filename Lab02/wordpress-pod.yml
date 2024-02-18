@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  ##You can change name and label if wanted, just remember to replace on all subsequent labs.
+  name: wordpress-pod
+  labels:
+    app: wordpress-pod
+spec:
+  containers:
+  - name: wordpress-container
+    image: wordpress:latest
+    env:
+    ## Fill in below all variable names and values for a working Wordpress deployment. Each varibla should have a name/value pair.
+    - name: <REPLACE THIS BY THE NEEDED VARIABLE NAME>
+      value: <REPLACE THIS BY THE NEEDED VARIABLE VALUE>
+    ports:
+    - containerPort: 80
