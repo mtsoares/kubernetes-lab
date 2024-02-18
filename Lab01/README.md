@@ -10,11 +10,21 @@ Follow the instructions below for the installation and configuration.
 
 ## Installation
 
-Use the package manager [pip](https://pip.pypa.io/en/stable/) to install foobar.
+On your SSH client logged into the Linux lab instance, execute the following command to install K3s:
 
 ```bash
-pip install foobar
+curl -sfL https://get.k3s.io | sh -
 ```
+
+After the installation is complete, the K3s cluster configuration file for access is located under the /etc folder on the linux VM. The following commands will create a .kube folder under the actual user directory, copy over the config file and set appropriate permissions.
+
+```bash
+mkdir ~/.kube
+sudo cp /etc/rancher/k3s/k3s.yaml ~/.kube/config
+sudo chown ubuntu ~/.kube/config
+```
+
+
 
 ## Usage
 
