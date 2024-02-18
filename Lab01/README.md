@@ -31,6 +31,13 @@ tls-san:
 
 Save the file (CTRL+O) and exit (CTRL+X).
 
+Clone the lab repository on the "ubuntu" home directory:
+
+```bash
+cd ~
+git clone https://github.com/mtsoares/kubernetes-lab.git
+```
+
 ## Installation
 
 On your SSH client logged into the Linux lab instance, execute the following command to install K3s and all kube* (kubeadm, kubectl) tools to manage it:
