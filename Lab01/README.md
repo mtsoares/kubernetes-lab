@@ -22,7 +22,7 @@ Edit the following file (as root):
 sudo nano /etc/rancher/k3s/config.yaml 
 ```
 
-Add the below information on it, replacing <FQDN> by the lab VM FQDN provided by the instructor:
+Add the below information on it, replacing \<FQDN\> by the lab VM FQDN provided by the instructor:
 
 ```yaml
 tls-san:
