@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: <PROVIDE A NAME FOR THE PVC>
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 100Mi ##Leave 100MB, don´t change it.
+  storageClassName: <PROVIDE THE STORAGE CLASS NAME>
