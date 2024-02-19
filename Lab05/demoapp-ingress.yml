@@ -4,13 +4,13 @@ metadata:
   name: demoapp-ingress
 spec:
   rules:
-    - host: demoapp-user01.vmsoares.com
+    - host: <PROVIDE FQDN FOR DEMOAPP>
       http:
         paths:
           - path: /
             pathType: Prefix
             backend:
               service:
-                name: demoapp-service
+                name: <PROVIDE DEMOAPP SERVICE NAME>
                 port:
                   number: 80

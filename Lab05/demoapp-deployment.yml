@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: demoapp-deployment
+  labels:
+    app: demoapp-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: demoapp-pod
+  template:
+    metadata:
+      labels:
+        app: demoapp-pod
+    spec:
+      imagePullSecrets:
+      - name: <SECRET CREATED FOR REGISTRY ACCES>
+      containers:
+      - name: demoapp-container
+        image: <NAME AND TAG OF DEMOAPP CONTAINER>
+        env:
+        - name: <CONFIGURE VARIABLE NAMES HERE>
+          value: <CONFIGURE VARIABLES VALUES HERE>
+        ports:
+        - containerPort: 80

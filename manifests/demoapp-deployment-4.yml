@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: demoapp-deployment
+  labels:
+    app: demoapp-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: demoapp-pod
+  template:
+    metadata:
+      labels:
+        app: demoapp-pod
+    spec:
+      imagePullSecrets:
+      - name: aws-registry
+      containers:
+      - name: demoapp-container
+        image: 707246573807.dkr.ecr.us-west-2.amazonaws.com/training:1.0
+        envFrom:
+        - configMapRef:
+            name: demoapp-configmap
+        - secretRef:
+            name: demoapp-dbpassword-secret
+        env:
+        #- name: DATABASE_SERVER
+        #  value: training.cvfp3zph2lm7.us-west-2.rds.amazonaws.com
+        - name: DATABASE_USERNAME
+          value: demoappuser
+        #- name: DATABASE_PASSWORD
+        #  value: securepassword
+        - name: DATABASE_NAME
+          value: demoappdb
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - mountPath: /var/www/html/index.html
+          name: demoapp-index
+          subPath: index.html
+      volumes:
+      - name: demoapp-index
+        configMap:
+          name: demoapp-newindex-configmap

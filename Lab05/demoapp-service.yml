@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: <PROVIDE A NAME FOR THE SERVICE>
+  labels:
+    app: <PROVIDE A LABEL TO THE SERVICE>
+spec:
+  type: <PROVIDE THE TYPE FOR THE SERVICE>
+  ports:
+  - protocol: TCP
+    targetPort: 80
+    port: 80
+  selector:
+    app: demoapp-pod ##CHANGE HERE ONLY IF YOU CHANGED THE POD LABEL ON THE DEPLOYMENT
