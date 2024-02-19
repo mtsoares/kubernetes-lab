@@ -1,33 +1,13 @@
-# Foobar
+# Kubernetes course Lab Materials
 
-Foobar is a Python library for dealing with word pluralization.
+This project hosts lab instructions and assist files to perform a Basic to Advanced set of exercises on Kubernetes.
 
-## Installation
+Follow the subfolder order (Lab01, Lab02, etc) to be able to execute lab steps.
 
-Use the package manager [pip](https://pip.pypa.io/en/stable/) to install foobar.
+This lab requires:
 
-```bash
-pip install foobar
-```
-
-## Usage
-
-```python
-import foobar
-
-# returns 'words'
-foobar.pluralize('word')
-
-# returns 'geese'
-foobar.pluralize('goose')
-
-# returns 'phenomenon'
-foobar.singularize('phenomena')
-```
-
-## Contributing
-
-Pull requests are welcome. For major changes, please open an issue first
-to discuss what you would like to change.
-
-Please make sure to update tests as appropriate.
+* A Ubuntu machine (tested on 22.04 LTS)
+* FQDN for the VM
+* FQDN for a Wordpress service to be installed
+* FQDN for a demoapp service to be installed
+* Demoapp to be uploaded toa public container repository
