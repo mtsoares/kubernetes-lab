@@ -56,3 +56,37 @@ Create a ClusterIP service for demoapp editing the demoapp-service.yml file, and
 
 Create a Ingress for demoapp editing the demoapp-ingress.yml file, and then apply the ingress file.
 
+Test the application by opening a browser and accessing http://\<DEMOAPP_FQDN\>/demoapp.php. This application shows some information that will be useful for troubleshooting and visibility:
+
+* The environment variables provided
+* The name of the pod running the container
+* A list of students added to the MySQL database being connected.
+
+## Scale up the deployment
+
+Edit the demoapp-deployment.yml file and change the replica amount from 1 to 3. Apply the file and:
+
+* Check if the number of replicas changed using "kubectl get deployments"
+* Refresh the browser and check the Pod field. It should change to reflect from what pod the application is running from.
+* Check the pod names doing a "kubectl get pods" and check if the pod names are the same visible on the application.
+
+## Create a configMap for common configurations
+
+ConfigMaps are useful to reuse the same configuration accross several pods and deployments. On demoapp, if several apps were running o the same cluster and the database server was always the same, would be interesting to centralize it configuration.
+
+Edit the demoapp-configmap.yml file and add the requested information about the databsae server on the file. Apply the file and check if the configmap is created:
+
+```bash
+kubectl get configmaps
+```
+
+Edit the demoapp-deployment.yml and remove the environment variable DATABASE_SERVER and its value. Add the following under the container configuration (right below the image configuration):
+
+```yaml
+        envFrom:
+        - configMapRef:
+            name: demoapp-configmap
+```
+
+Apply the configuration again and check if demoapp application still works.
+
