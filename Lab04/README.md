@@ -31,7 +31,7 @@ Edit the wordpress-pvc.yml file, changing the values where requested. Apply the 
 kubectl get pvc
 ```
 
-Write the PVC name on the notepad as it will be used on the next task.
+The PVC status should be PENDING (this will change once a pod is attached to it). Write the PVC name on the notepad as it will be used on the next task.
 
 ## Add the PVC to the actual Wordpress Pod
 
@@ -58,4 +58,24 @@ Add the following under the "container" for the pod:
       name:  \<VOLUME_NAME_JUST_CREATED\>
 ```
 
-Save the pod file and apply it again.
+Save the pod file.
+
+Delete the wordpress pod by running:
+
+```bash
+kubectl delete pod \<WORDPRESS_POD_NAME\>
+```
+
+Apply the file just created, with the volume mount, so a new pod is created:
+
+```bash
+kubectl apply -f ~/kubernetes-lab/Lab02/wordpress-pod.yml
+```
+
+Test, in a browser, if the Wordpress site is working using the http://\<STUDENT_WORDPRESS_URL\>. Perform the following actions:
+
+* Login to wordpress and create a new post adding a image file to it. Check if the post can be readed and the image can be displayed.
+* Delete the wordpress pod, and recreate it again
+* Check if the page just created still displays the uploaded image.
+
+If you need any assistance with the previous steps, ask your instructor.
