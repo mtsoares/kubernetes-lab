@@ -72,4 +72,4 @@ Apply the wordpress-ingress.yml file and check if the ingress was correctly conf
 kubectl get ingress
 ```
 
-Open a browser tab and try to access http://\<WORDPRESS_FQDN\>. Don´t change anything for now.
+Open a browser tab and try to access http://\<WORDPRESS_FQDN\>. Complete the Wordpress setup (writing down on notepad the username and password configred) and test the login to the http://\<WORDPRESS_FQDN\>/wp-admin URL.
