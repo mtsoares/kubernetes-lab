@@ -2,7 +2,7 @@
 
 On this lab, we will work with data persistence on the Wordpress Pod.
 
-## Create a Persisten Volume Claim
+## Create a Persistent Volume Claim
 
 Get the Storage Classes present on the cluster with:
 
@@ -24,31 +24,5 @@ Edit the wordpress-pvc.yml file, changing the values where requested. Apply the 
 kubectl get pvc
 ```
 
+## Add the PVC to the actual Wordpress Pod
 
-Use the package manager [pip](https://pip.pypa.io/en/stable/) to install foobar.
-
-```bash
-pip install foobar
-```
-
-## Usage
-
-```python
-import foobar
-
-# returns 'words'
-foobar.pluralize('word')
-
-# returns 'geese'
-foobar.pluralize('goose')
-
-# returns 'phenomenon'
-foobar.singularize('phenomena')
-```
-
-## Contributing
-
-Pull requests are welcome. For major changes, please open an issue first
-to discuss what you would like to change.
-
-Please make sure to update tests as appropriate.
