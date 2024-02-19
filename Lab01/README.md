@@ -94,6 +94,6 @@ Using a txt file on your own computer answer the following (as the instructor if
 
 ## Challenge
 
-Using the information collected so far, try to configure your own personal computer to acess the cluster you have just installed using kubectl. If needed, as your instructor for assistance. Some references that may help:
+Using the information collected so far, try to configure your own personal computer to access the cluster you have just installed using kubectl. If needed, ask your instructor for assistance. Some references that may help:
 
 * https://kubernetes.io/docs/tasks/tools/
