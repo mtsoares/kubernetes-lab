@@ -45,9 +45,9 @@ Add the following under the "spec" for the pod:
 
 ```yaml
   volumes:
-    - name: \<PUT_HERE_A_NAME_FOR_THE_VOLUME\>
+    - name: <PUT_HERE_A_NAME_FOR_THE_VOLUME>
       persistentVolumeClaim:
-        claimName: \<PUT_HERE_THE_PVC_NAME\>
+        claimName: <PUT_HERE_THE_PVC_NAME>
 ```
 
 Add the following under the "container" for the pod:
@@ -55,7 +55,7 @@ Add the following under the "container" for the pod:
 ```yaml
     volumeMounts:
     - mountPath: /var/www/html
-      name:  \<VOLUME_NAME_JUST_CREATED\>
+      name:  <VOLUME_NAME_JUST_CREATED>
 ```
 
 Save the pod file.
