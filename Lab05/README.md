@@ -172,4 +172,4 @@ Add the following right at the end of the demoapp-deployment.yml file:
 * volumeMounts should be inside the "container:" object
 * volumes should be inside spec: (PodSpec).
 
-Apply the changed file and check if demoapp application is working ok. Then, try to access http://\<DEMOAPP_UDL\>/ (with no demoapp.php on it) and check if your HTML file works.
+Apply the changed file and check if demoapp application is working ok. Then, try to access http://\<DEMOAPP_FQDN\>/ (with no demoapp.php on it) and check if your HTML file works.
