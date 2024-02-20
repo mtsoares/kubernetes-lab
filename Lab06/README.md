@@ -1,33 +1,55 @@
-# Foobar
+# Lab 06
 
-Foobar is a Python library for dealing with word pluralization.
+On this lab, a Prometheus and Grafana based monitoring solution will be installed on the cluster and externally accessed.
 
-## Installation
+## Preparation
 
-Use the package manager [pip](https://pip.pypa.io/en/stable/) to install foobar.
+Create a namespace for the monitoring infrastructure:
 
 ```bash
-pip install foobar
+kubectl create namespace monitoring
+kubectl config set-context --current --namespace=monitoring
 ```
 
-## Usage
+Access the Lab06 folder containg configuration files for the monitoring tools. There is no need to change any configuration file:
 
-```python
-import foobar
-
-# returns 'words'
-foobar.pluralize('word')
-
-# returns 'geese'
-foobar.pluralize('goose')
-
-# returns 'phenomenon'
-foobar.singularize('phenomena')
+```bash
+cd ~/kubernetes-lab/Lab06/
 ```
 
-## Contributing
+Install the helm tool on the Linux VM:
 
-Pull requests are welcome. For major changes, please open an issue first
-to discuss what you would like to change.
+```bash
+sudo snap install helm --classic
+```
 
-Please make sure to update tests as appropriate.
+Add the prometheus default repository to the local helm:
+
+```bash
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+```
+
+Install the monitoring stack:
+
+```bash
+helm upgrade --install prometheus prometheus-community/kube-prometheus-stack --version 39.13.3 --values kube-prometheus-stack-values.yaml
+```
+
+Check if all pods for monitoring are up:
+
+```bash
+kubectl get pods
+```
+
+Check the NodePort service created for grafana:
+
+```bash
+kubectl get svc
+```
+
+Look for a service called "prometheus-grafana", and check what is the NodePort exposed for it (should be 3XXXX). Open a browser and access http://\<VM_FQDN_OR_IP\>:\<NODEPORT\>. Credentials are admin/prom-operator.
+
+Navigate to the dashboard named "Kubernetes / Compute Resources / Cluster" and observe the data being displayed.
+
+## Installing Rancher Manager
+
