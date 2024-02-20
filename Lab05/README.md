@@ -85,8 +85,39 @@ Edit the demoapp-deployment.yml and remove the environment variable DATABASE_SER
 ```yaml
         envFrom:
         - configMapRef:
-            name: demoapp-configmap
+            name: \<NAME OF THE CREATED SCONFIGMAP\>
 ```
 
-Apply the configuration again and check if demoapp application still works.
+Apply the configuration again and check if demoapp application still works, displaying the information from the MySQL database. If not check the deployment again or ask your instructor for assistance.
 
+## Create a Secret to store password
+
+Secrets are useful tools to hide sensitive information on Kbernetes. On demoapp, the DB password is stored as an environment variable, and it can be moved to a Secret.
+
+In order to store a secret, it is needed to encode the DB password using base64 algorithm. Use the following command to do so:
+
+```bash
+printf '<PUT HERE THE DATABSAE PASSWORD>' | base64
+```
+
+Copy the command output as the encoded password. Now, edit the demoapp-secret.yml file, adding the encoded password where indicated. Apply the file and check with "kubectl get secrets" if it is being listed.
+
+Edit the demoapp-deployment file and add the following right below the name of the configMapRef added previously (inside the envFrom object):
+
+```yaml
+        - secretRef:
+            name: \<NAME OF SECRET CONFIGURED\>
+```
+
+It should look like this:
+
+```yaml
+        envFrom:
+        - configMapRef:
+            name: \<NAME OF THE CREATED SCONFIGMAP\>
+        - secretRef:
+            name: \<NAME OF SECRET CONFIGURED\>
+
+```
+
+Save and apply the file. test if the demoapp is still working correctly.
