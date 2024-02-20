@@ -19,6 +19,7 @@ Before installing, a specific non-default configuration is needed to avoid certi
 Edit the following file (as root): 
 
 ```bash
+sudo mkdir -p /etc/rancher/k3s/
 sudo nano /etc/rancher/k3s/config.yaml 
 ```
 
