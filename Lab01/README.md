@@ -43,8 +43,10 @@ git clone https://github.com/mtsoares/kubernetes-lab.git
 On your SSH client logged into the Linux lab instance, execute the following command to install K3s and all kube* (kubeadm, kubectl) tools to manage it:
 
 ```bash
-curl -sfL https://get.k3s.io | sh -
+curl -sfL https://get.k3s.io | INSTALL_K3S_VERSION=v1.27.9+k3s1 sh -
 ```
+
+*NOTE* The version is specified so all helm charts we install works correctly. Usually ther is no need to specify a k3s version to use the latest one.
 
 *WARNING* The above command should not be executed in production. Read the documentation before performing it on production environments.
 
