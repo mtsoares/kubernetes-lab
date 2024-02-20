@@ -85,7 +85,7 @@ Edit the demoapp-deployment.yml and remove the environment variable DATABASE_SER
 ```yaml
         envFrom:
         - configMapRef:
-            name: \<NAME OF THE CREATED SCONFIGMAP\>
+            name: <NAME OF THE CREATED SCONFIGMAP>
 ```
 
 Apply the configuration again and check if demoapp application still works, displaying the information from the MySQL database. If not check the deployment again or ask your instructor for assistance.
@@ -106,7 +106,7 @@ Edit the demoapp-deployment file and add the following right below the name of t
 
 ```yaml
         - secretRef:
-            name: \<NAME OF SECRET CONFIGURED\>
+            name: <NAME OF SECRET CONFIGURED>
 ```
 
 It should look like this:
@@ -114,10 +114,14 @@ It should look like this:
 ```yaml
         envFrom:
         - configMapRef:
-            name: \<NAME OF THE CREATED SCONFIGMAP\>
+            name: <NAME OF THE CREATED SCONFIGMAP>
         - secretRef:
-            name: \<NAME OF SECRET CONFIGURED\>
+            name: <NAME OF SECRET CONFIGURED>
 
 ```
 
 Save and apply the file. test if the demoapp is still working correctly.
+
+## Using ConfigMaps to mount files within the pod
+
+
