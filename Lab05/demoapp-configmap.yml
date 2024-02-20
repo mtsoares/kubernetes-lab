@@ -1,6 +1,6 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: demoapp-configmap
+  name: <PROVIDE A NAME FOR THE CONFIGMAP>
 data:
   DATABASE_SERVER: <REPLACE HERE BY THE MYSQL SERVER NAME OR IP>
