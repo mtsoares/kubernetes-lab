@@ -124,4 +124,52 @@ Save and apply the file. test if the demoapp is still working correctly.
 
 ## Using ConfigMaps to mount files within the pod
 
+Configmaps can be used to store any kind of information. On this task, a html file will be configured as a configmap and injected on the Pods as a volume.
 
+Create a HTML file named index.html on the Linux VM with any information you want. Example below:
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HTML file on a great training!</title>
+</head>
+ 
+<body>
+    <h1 style="color:Blue"> 
+        Great training and great lab!  
+    </h1>
+Will definitely recommend.
+</body>
+</html>
+```
+
+Create a configmap from the file created:
+
+```bash
+kubectl create configmap demoapp-newindex-configmap --from-file ./index.html
+```
+
+Check the configmap contents in YAML format
+
+```bash
+kubectl get configmap demoapp-newindex-configmap -o yaml
+```
+
+Add the following right at the end of the demoapp-deployment.yml file:
+
+```yaml
+        volumeMounts:
+        - mountPath: /var/www/html/index.html
+          name: demoapp-index
+          subPath: index.html
+      volumes:
+      - name: demoapp-index
+        configMap:
+          name: demoapp-newindex-configmap
+```
+
+* volumeMounts should be inside the "container:" object
+* volumes should be inside spec: (PodSpec).
+
+Apply the changed file and check if demoapp application is working ok. Then, try to access http://\<DEMOAPP_UDL\>/ (with no demoapp.php on it) and check if your HTML file works.
