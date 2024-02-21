@@ -10,4 +10,4 @@ This lab requires:
 * FQDN for the VM
 * FQDN for a Wordpress service to be installed
 * FQDN for a demoapp service to be installed
-* Demoapp to be uploaded toa public container repository
+* Demoapp to be uploaded to a public container repository
