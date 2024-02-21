@@ -53,3 +53,41 @@ Navigate to the dashboard named "Kubernetes / Compute Resources / Cluster" and o
 
 ## Installing Rancher Manager
 
+Rancher manager community is an opensource tool that allows a graphical UI for managing multiple clusters., including the one where the manager is installed.
+
+Install cert-manager so Rancher can generate certificates:
+
+```bash
+kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.14.2/cert-manager.crds.yaml
+helm repo add jetstack https://charts.jetstack.io
+helm repo update
+helm install cert-manager jetstack/cert-manager --namespace cert-manager --create-namespace
+```
+
+Create a namespace for the Rancher manager:
+
+```bash
+kubectl create namespace cattle-system
+kubectl config set-context --current --namespace=cattle-system
+```
+
+Add the helm repository for Rancher:
+
+```bash
+helm repo add rancher-latest https://releases.rancher.com/server-charts/latest
+helm repo update
+```
+
+Execute the following command to perform the installation:
+
+```bash
+helm install rancher rancher-latest/rancher --namespace cattle-system --set hostname=<LAB_VM_FQDN> --set bootstrapPassword=admin123
+```
+
+Wait for all rancher pods to be up checking with "kubectl get pods". This may take around 20 minutes. All pods should be on Successful or Running state.
+
+On a browser, connect to https://\<LAB_VM_FQDN\> and provide the following bootstrap password: admin123 (provided on the install command). Create a username and password and login, then check the "local" cluster:
+
+* Check if all namespaces are available for browsing
+* Check if all Pods and Deployments created are visible
+* Check if all Services and Ingresses are available
