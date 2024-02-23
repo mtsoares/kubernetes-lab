@@ -12,10 +12,10 @@ Ask your instructor for the following information:
 
 demoapp uses the following environment variables for configuration:
 
-DATABASE_SERVER: mysql database server name already provided by the instructo
-DATABASE_USERNAME: demoappuser
-DATABASE_PASSWORD: securepassword
-DATABASE_NAME: demoappdb
+* DATABASE_SERVER: mysql database server name already provided by the instructor on Lab 02
+* DATABASE_USERNAME: demoappuser
+* DATABASE_PASSWORD: securepassword
+* DATABASE_NAME: demoappdb
 
 All 4 environment variables must be configured at the deployment on this lab.
 
