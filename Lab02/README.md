@@ -95,7 +95,7 @@ Access Lab02 folder containing some helper files:
 cd ~/kubernetes-lab/Lab02
 ```
 
-Edit the wordpress-pod.yml file adding the required information on the file. Once done, apply the create file and check if the pod started correctly by:
+Edit the wordpress-pod.yml file adding the required information on the file. Once done, apply the created file and check if the pod started correctly by:
 
 * Getting all the pods on the current namespace wordpress-apps and checking the status
 * Checking the logs for the created pod.
