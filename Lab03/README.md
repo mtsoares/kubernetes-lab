@@ -51,7 +51,7 @@ kubectl config set-context --current --namespace=wordpress-apps
 On the Lab03 lab directory, edit the wordpress-service.yml file and change the appropriate information:
 * Service type should be ClusterIP. Ths will allow the service to be used by the ingress that will be created next.
 * Make sure the Pod Selector is configured with the label the wordpress pod is using.
-* * You can check the Pod Selector by checking the applied yml file for the pod or using kubectl describe pod \<PODNAME\>
+* You can check the Pod Selector by checking the applied yml file for the pod or using kubectl describe pod \<PODNAME\>
 
 Apply the file and check if the service is up:
 
