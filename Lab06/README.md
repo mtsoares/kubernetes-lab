@@ -49,7 +49,13 @@ kubectl get svc
 
 Look for a service called "prometheus-grafana", and check what is the NodePort exposed for it (should be 3XXXX). Open a browser and access http://\<VM_FQDN_OR_IP\>:\<NODEPORT\>. Credentials are admin/prom-operator.
 
-Navigate to the dashboard named "Kubernetes / Compute Resources / Cluster" and observe the data being displayed.
+Navigate to the dashboard named "Kubernetes / Compute Resources / Cluster" and observe the data being displayed. As the presented dashboards are not correctly configured, some data may not be displayed. Try to correct some of the widgets if you know Grafana.
+
+After this is tested, delete the monitoring stack to save lab resources:
+
+```bash
+helm uninstall prometheus
+```
 
 ## Installing Rancher Manager
 
@@ -91,3 +97,4 @@ On a browser, connect to https://\<LAB_VM_FQDN\> and provide the following boots
 * Check if all namespaces are available for browsing
 * Check if all Pods and Deployments created are visible
 * Check if all Services and Ingresses are available
+* Try to manage the "local" cluster using the kubeconfig file offered by the Rancher manager.
