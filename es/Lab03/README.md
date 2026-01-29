@@ -2,41 +2,41 @@
 
 En este lab, usaremos servicios y entradas para darle acceso externo a la app de ejemplo y también para la app de Wordpress.
 
-## Preparation
+## Preparación
 
-For this lab, ask your instructor for the Wordpress FQDN that will be used.
+Para este lab, pide el FQDN de Wordpress que deberás usar a tu instructor/a.
 
-## Creating a NodePort service for the nginx sample pod.
+## Crear un servicio de NodePort para el pod de muestra nginx.
 
-The Nginx sample pod created on the previous exercise is still not accessible from anywhere. We will be createting a NodePort service to expose it over a TCP port on the 30000-32000 range at the Kubernetes nodes.
+El pod de prueba que creaste en el ejercicio anterior aún no puede accederse desde ninguna parte. Crearemos un servicio de NodePort para exponerlo a través de un puerto TCP en el rango 30000-32000 en los nodos de Kubernetes.
 
-Change the namespace back to the "default" one and make sure the nginx pod created on Lab 02 is there and working:
+Cambia nuevamente el namespace al "default" y asegúrate de que el pod nginx que creaste en el Lab 02 siga allí y esté funcionando:
 
 ```bash
 kubectl config set-context --current --namespace=default
 kubectl get pods
 ```
 
-Access the Lab03 folder and edit the nginx-service.yml file:
+Accede a la carpeta del Lab03 y edita el archivo nginx-service.yml:
 
 ```bash
 cd ~/kubernetes-lab/Lab03/
 nano nginx-service.yml
 ```
 
-Change the values requested on the file so it reflects what have been configured on the nginx pod and apply the file. If you need any information, ask the instructor.
+Cambia los valores solicitados en el archivo para que reflejen lo que se configuró en el pod nginx pod y aplica el archivo. Si necesitas alguna información, pide ayuda a tu instructor/a.
 
-Check that the service have been started and listed with the name provided:
+Revisa que el servicio se haya iniciado y esté listado bajo el nombre provisto:
 
 ```bash
 kubectl get services
 ```
 
-Under the PORT column of the service created, you will notice that a node port was randomly selected (it will appear as 80:3XXXX/TCP, where 3XXXX is the TCP port exposed on the Kubernetes node). Write the configured TCP port on your notepad for notes.
+En la columna PORT del servicio creado, notarás que un puerto de nodos se ha seleccionado de manera aleatoria (figurará como 80:3XXXX/TCP, donde 3XXXX es el puerto TCP expuesto en el nodo de Kubernetes). En tu notepad, anota el puerto TCP configurado.
 
-Now, from a web browser, try to access the nginx pod using http://\<YOUR VM FQDN OR IP\>:3XXXX (replace 3XXXX by the port listed on the previous command). a "Welcome do NGINX" web page should appear.
+Ahora, desde un navegador, intenta acceder al pod nginx pod usando http://\<YOUR VM FQDN OR IP\>:3XXXX (reemplaza 3XXXX por el puerto listado en el comando anterior). Debería aparecer una página web de "Welcome to NGINX".
 
-*CHALLENGE*: using the documentation on https://kubernetes.io/docs/reference/kubernetes-api/service-resources/service-v1/, try to make the nodePort FIXED and not RANDOM.
+*DESAFÍO*: usando la documentación en https://kubernetes.io/docs/reference/kubernetes-api/service-resources/service-v1/, intenta hacer que el NodePort sea FIXED y no RANDOM.
 
 No other actions will be taken with the nginx pod, but if you want to try other additional configurations ask the instructor for examples or try it yourself.
 
