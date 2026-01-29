@@ -1,13 +1,13 @@
-# Kubernetes course Lab Materials
+# Materiales de laboratorio para curso de Kubernetes
 
-This project hosts lab instructions and assist files to perform a Basic to Advanced set of exercises on Kubernetes.
+Este proyecto contiene instrucciones de laboratorio y archivos de ayuda para realizar una serie de ejercicios sobre Kubernetes, de Básicos a Avanzados.
 
-Follow the subfolder order (Lab01, Lab02, etc) to be able to execute lab steps.
+Sigue el orden de las sub-carpetas (Lab01, Lab02, etc) para poder ejecutar los pasos del laboratorio.
 
-This lab requires:
+Este laboratorio requiere:
 
-* A Ubuntu machine (tested on 22.04 LTS)
-* FQDN for the VM
-* FQDN for a Wordpress service to be installed
-* FQDN for a demoapp service to be installed
-* Demoapp to be uploaded to a public container repository
+* Una máquina Ubuntu (testeada en 22.04 LTS)
+* Un Fully Qualified Domain Name (FQDN) para la VM
+* Un FQDN para instalar un servicio de Wordpress
+* Un FQDN para instalar el servicio de la demoapp
+* La Demoapp para subirla a un repositorio público de contenedores
