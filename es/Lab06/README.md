@@ -1,67 +1,67 @@
 # Lab 06
 
-On this lab, a Prometheus and Grafana based monitoring solution will be installed on the cluster and externally accessed.
+En este lab, instalaremos una solución de supervisión basada en Prometheus y Grafana en el cluster, y accederemos a ella de manera externa.
 
-## Preparation
+## Preparación
 
-Create a namespace for the monitoring infrastructure:
+Crea un namespace para la infraestructura de supervisión:
 
 ```bash
 kubectl create namespace monitoring
 kubectl config set-context --current --namespace=monitoring
 ```
 
-Access the Lab06 folder containg configuration files for the monitoring tools. There is no need to change any configuration file:
+Dirígete a la carpeta del Lab06, que contiene los archivos de configuración para las herramientas de supervisión. No hace falta que cambies ningún archivo de configuración:
 
 ```bash
 cd ~/kubernetes-lab/Lab06/
 ```
 
-Install the helm tool on the Linux VM:
+Instala la herramienta de helm en la VM de Linux:
 
 ```bash
 sudo snap install helm --classic
 ```
 
-Add the prometheus default repository to the local helm:
+Añade el repositorio predeterminado de Prometheus al helm local:
 
 ```bash
 helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
 ```
 
-Install the monitoring stack:
+Instala la pila de supervisión:
 
 ```bash
 helm upgrade --install prometheus prometheus-community/kube-prometheus-stack --version 39.13.3 --values kube-prometheus-stack-values.yaml
 ```
 
-Check if all pods for monitoring are up:
+Revisa que todos los pods de supervisión estén encendidos:
 
 ```bash
 kubectl get pods
 ```
 
-Check the NodePort service created for grafana:
+Revisa el servicio de NodePort creado para Grafana:
 
 ```bash
 kubectl get svc
 ```
 
-Look for a service called "prometheus-grafana", and check what is the NodePort exposed for it (should be 3XXXX). Open a browser and access http://\<VM_FQDN_OR_IP\>:\<NODEPORT\>. Credentials are admin/prom-operator.
+Busca un servicio llamado "prometheus-grafana", y revisa cuál es el NodePort expuesto (debería ser 3XXXX). Abre un navegador e ingresa en http://\<VM_FQDN_OR_IP\>:\<NODEPORT\>. Las credenciales son admin/prom-operator.
 
-Navigate to the dashboard named "Kubernetes / Compute Resources / Cluster" and observe the data being displayed. As the presented dashboards are not correctly configured, some data may not be displayed. Try to correct some of the widgets if you know Grafana.
+Dirígete al dashboard llamado "Kubernetes / Compute Resources / Cluster" y observa la información que se está mostrando. Dado que los dashboard presentados no están configurados de manera correcta, es posible que algunos datos no se muestren. Intenta conectar alguno de los widgets, si conoces Grafana.
 
-After this is tested, delete the monitoring stack to save lab resources:
+Luego de probar esto, elimina la pila de supervisión para guardar los recursos del lab:
 
 ```bash
 helm uninstall prometheus
 ```
 
-## Installing Rancher Manager
+## Instalar un Rancher Manager
 
-Rancher manager community is an opensource tool that allows a graphical UI for managing multiple clusters., including the one where the manager is installed.
+La comunidad de Rancher Manager es una herramienta opensource que proporciona una UI gráfica para manejar múltiples clusters, incluyendo el cluster en el que esté instalado el Manager.
 
-Install cert-manager so Rancher can generate certificates:
+Instala el cert-manager para que el Rancher pueda generar certificados:
 
 ```bash
 kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.14.2/cert-manager.crds.yaml
@@ -70,31 +70,31 @@ helm repo update
 helm install cert-manager jetstack/cert-manager --namespace cert-manager --create-namespace
 ```
 
-Create a namespace for the Rancher manager:
+Crea un a namespace para el Rancher Manager:
 
 ```bash
 kubectl create namespace cattle-system
 kubectl config set-context --current --namespace=cattle-system
 ```
 
-Add the helm repository for Rancher:
+Añade el repository de helm para Rancher:
 
 ```bash
 helm repo add rancher-latest https://releases.rancher.com/server-charts/latest
 helm repo update
 ```
 
-Execute the following command to perform the installation:
+Ejecuta el siguiente comando para realizar la instalación:
 
 ```bash
 helm install rancher rancher-latest/rancher --namespace cattle-system --set hostname=<LAB_VM_FQDN> --set bootstrapPassword=admin123
 ```
 
-Wait for all rancher pods to be up checking with "kubectl get pods". This may take around 20 minutes. All pods should be on Successful or Running state.
+Espera a que todos los pods de Rancher estén activos, revisándolo con «kubectl get pods». Esto puede tardar unos veinte minutos. Todos los pods deben estar en estado "Exitoso" o "En ejecución".
 
-On a browser, connect to https://\<LAB_VM_FQDN\> and provide the following bootstrap password: admin123 (provided on the install command). Create a username and password and login, then check the "local" cluster:
+En un navegador, ingresa en https://\<LAB_VM_FQDN\> y proporciona la siguiente contraseña de bootstrap : admin123 (provista en el comando de instalación). Crea un usuario, una contraseña y loguéate. Luego, revisa el cluster "local":
 
-* Check if all namespaces are available for browsing
-* Check if all Pods and Deployments created are visible
-* Check if all Services and Ingresses are available
-* Try to manage the "local" cluster using the kubeconfig file offered by the Rancher manager.
+* Revisa si todos los namespaces están disponibles para la navegación.
+* Revisa si todos los Pods e implementaciones creadas están visibles.
+* Revisa si todos los Servicios y Entradas están disponibles.
+* Intenta administrar el cluster "local" usando el archivo de kubeconfig file ofrecido por el Rancher Manager.
