@@ -29,7 +29,7 @@ Añade el repositorio predeterminado de Prometheus al helm local:
 helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
 ```
 
-Instala la pila de supervisión:
+Instala el stack de supervisión:
 
 ```bash
 helm upgrade --install prometheus prometheus-community/kube-prometheus-stack --version 39.13.3 --values kube-prometheus-stack-values.yaml
@@ -49,9 +49,9 @@ kubectl get svc
 
 Busca un servicio llamado "prometheus-grafana", y revisa cuál es el NodePort expuesto (debería ser 3XXXX). Abre un navegador e ingresa en http://\<VM_FQDN_OR_IP\>:\<NODEPORT\>. Las credenciales son admin/prom-operator.
 
-Dirígete al dashboard llamado "Kubernetes / Compute Resources / Cluster" y observa la información que se está mostrando. Dado que los dashboard presentados no están configurados de manera correcta, es posible que algunos datos no se muestren. Intenta conectar alguno de los widgets, si conoces Grafana.
+Dirígete al panel llamado "Kubernetes / Compute Resources / Cluster" y observa la información que se muestra. Dado que los paneles presentados no están configurados de manera correcta, es posible que algunos datos no se muestren. Intenta conectar alguno de los widgets, si conoces Grafana.
 
-Luego de probar esto, elimina la pila de supervisión para guardar los recursos del lab:
+Luego de probar esto, elimina el stack de supervisión para guardar los recursos del lab:
 
 ```bash
 helm uninstall prometheus
@@ -59,7 +59,7 @@ helm uninstall prometheus
 
 ## Instalar un Rancher Manager
 
-La comunidad de Rancher Manager es una herramienta opensource que proporciona una UI gráfica para manejar múltiples clusters, incluyendo el cluster en el que esté instalado el Manager.
+La comunidad de Rancher Manager es una herramienta opensource que ofrece una UI gráfica para manejar múltiples clusters, incluyendo el cluster en el que esté instalado el Manager.
 
 Instala el cert-manager para que el Rancher pueda generar certificados:
 
@@ -92,9 +92,9 @@ helm install rancher rancher-latest/rancher --namespace cattle-system --set host
 
 Espera a que todos los pods de Rancher estén activos, revisándolo con «kubectl get pods». Esto puede tardar unos veinte minutos. Todos los pods deben estar en estado "Exitoso" o "En ejecución".
 
-En un navegador, ingresa en https://\<LAB_VM_FQDN\> y proporciona la siguiente contraseña de bootstrap : admin123 (provista en el comando de instalación). Crea un usuario, una contraseña y loguéate. Luego, revisa el cluster "local":
+En un navegador, ingresa en https://\<LAB_VM_FQDN\> y proporciona la siguiente contraseña de bootstrap : admin123 (provista en el comando de instalación). Crea un usuario, una contraseña e inicia sesión. Luego, revisa el cluster "local":
 
-* Revisa si todos los namespaces están disponibles para la navegación.
-* Revisa si todos los Pods e implementaciones creadas están visibles.
-* Revisa si todos los Servicios y Entradas están disponibles.
+* Revisa que todos los namespaces estén disponibles para la navegación.
+* Revisa que todos los Pods e implementaciones creadas sean visibles.
+* Revisa que todos los Servicios y Entradas estén disponibles.
 * Intenta administrar el cluster "local" usando el archivo de kubeconfig file ofrecido por el Rancher Manager.
