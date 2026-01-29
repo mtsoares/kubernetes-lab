@@ -1,6 +1,6 @@
 # Lab 04
 
-En este lab, trabajaremos con persistencia de datos en el pod de Wordpress que creamos en el Lab 02.
+En este lab, trabajaremos con persistencia de datos en el pod de Wordpress que hemos creado en el Lab 02.
 
 ## Crear una Claim de Volumen
 
@@ -17,7 +17,7 @@ Obtén las Storage Classes en el cluster con:
 kubectl get storageclasses
 ```
 
-Escribe en notepad el nombre de la class disponible, ya que la usarás más adelante.
+Escribe en el notepad el nombre de la clase disponible, ya que la usarás más adelante.
 
 Dirígete a la carpeta del Lab04:
 
@@ -25,17 +25,17 @@ Dirígete a la carpeta del Lab04:
 cd ~/kubernetes-lab/Lab04
 ```
 
-Edita el archivo wordpress-pvc.yml, cambiando los valores donde se requiera. Aplica el archivo y revisa que el PVC se haya creado, con:
+Edita el archivo wordpress-pvc.yml, cambiando los valores donde sea necesario. Aplica el archivo y revisa que el PVC se haya creado, con:
 
 ```bash
 kubectl get pvc
 ```
 
-El estado del PVC debería ser PENDIENTE (esto cambiará una vez que el pod esté asociado a él). Apunta el nombre del PVC en notepad, ya que lo usarás en la siguiente tarea.
+El estado del PVC deberá ser PENDIENTE (esto cambiará una vez que el pod esté asociado a él). Apunta el nombre del PVC en tu notepad, ya que lo usarás en la siguiente tarea.
 
 ## Añadir el PVC al pod de Wordpress actual
 
-Cambiarás el mismo archivo de configuración usado en el Lab02:
+Cambiarás el mismo archivo de configuración que usaste en el Lab02:
 
 ```bash
 nano ~/kubernetes-lab/Lab02/wordpress-pod.yml
@@ -66,7 +66,7 @@ Elimina el pod de Wordpress, ejecutando:
 kubectl delete pod \<WORDPRESS_POD_NAME\>
 ```
 
-Aplica el archivo que se acaba de crear, con el montaje del volumen, para que se cree un nuevo pod:
+Aplica el archivo que se acaba de crear con el montaje del volumen, para que se cree un nuevo pod:
 
 ```bash
 kubectl apply -f ~/kubernetes-lab/Lab02/wordpress-pod.yml
@@ -74,8 +74,8 @@ kubectl apply -f ~/kubernetes-lab/Lab02/wordpress-pod.yml
 
 En un navegador, prueba si el sitio Wordpress está funcionando, usando el http://\<STUDENT_WORDPRESS_URL\>. Realiza las siguientes acciones:
 
-* Loguéate al Wordpress y crea una nueva publicación, añadiendo un archivo de imagen a ella. Revisa si el texto se puede leer y si la imagen se ha mostrado correctamente.
+* Inicia sesión en Wordpress y crea una nueva publicación, subiendo un archivo de imagen a ella. Revisa que el texto se pueda leer y que la imagen se esté mostrando de forma correcta.
 * Elimina el pod de Wordpress. Luego, vuelve a crearlo.
-* Revisa si la página que acabas de crear sigue mostrando correctamente la imagen que subiste.
+* Revisa si la página que acabas de crear sigue mostrando de forma correcta la imagen que subiste.
 
 Si necesitas ayuda, pídele a tu instructor/a.
