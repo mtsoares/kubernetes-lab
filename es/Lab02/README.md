@@ -1,16 +1,16 @@
 # Lab 02
 
-In this lab, a sample Pod and a Wordpress Pod will be created with access to a MySQL database, enabling Worpress to run successfully.
+En este lab, se crearán un Pod de muestra y un Pod de Wordpress con acceso a una base de datos MySQL, lo que permitirá que Worpress funcione correctamente.
 
-## Create a simple pod
+## Crear un pod simple
 
-Create a file called nginx-pod.yml using an editor:
+Crea un archivo llamado nginx-pod.yml usando un editor:
 
 ```bash
 nano nginx-pod.yml
 ```
 
-Add the following to the file, using the latest version of the official nginx pod on the Docker Hub:
+Añade el siguiente comando al archivo, usando la última versión del pod oficial nginx en el Hub de Docker:
 
 ```yaml
 apiVersion: v1
@@ -23,82 +23,82 @@ spec:
     image: ## Replace here by a suitable image for nginx ##
 ```
 
-Apply the file:
+Aplica el archivo:
 
 ```bash
 kubectl apply -f nginx-pod.yml
 ```
 
-Check if the pod with the name provided have started and check details about the pod:
+Revisa que el pod con el nombre provisto haya empezado. Luego, revisa los detalles sobre este pod:
 
 ```bash
 kubectl get pods
 kubectl get pods -o wide
 ```
 
-Check logs for the pod:
+Revisa los logs para el pod:
 
 ```bash
 kubectl logs PODNAME
 ```
 
-Check the pod information:
+Revisa la información del the pod:
 
 ```bash
 kubectl describe pod PODNAME
 ```
 
-Add the following to the Pod "metadata" section and apply the file using the same command used previously:
+Añade la siguiente sección de "metadata" y aplica el archivo usando el mismo comando anterior:
 
 ```yaml
   labels:
     app: nginx-pod
 ```
 
-Check logs for any pods that have that label:
+Revisa los logs para cualquiera de los pods que tengan la etiqueta:
 
 ```bash
 kubectl logs --selector app=nginx-pod
 ```
 
-Leave the pod running for a later lab.
+Deja el of funcionando para un lab futuro.
 
-## Preparation for the Wordpress implementation
+## Preparación para la implementación en Wordpress
 
-Using the official documentation for the Wordpress container by Docker on https://hub.docker.com/_/wordpress, find and write down the environment variables  that are needed for a successful Wordpress implementation:
+Usando la documentación oficial de Docker para el contenedor de Wordpress en https://hub.docker.com/_/wordpress, encuentra y escribe las variables de entorno necesarias para una implementación exitosa en Worpress:
 
-* Variable for the database server hostname/IP
-* Variable for the database username
-* Variable for the database user password
-* Variable for the database name on the database server
+* Variable para el servidor de base de datos hostname/IP
+* Variable para el nombre de usuario de la base de datos
+* Variable para la contraseña de usuario de la base de datos
+* Variable para el nombre de la base de datos en el servidor de base de datos
 
-Ask your instructor for the following information:
+Pide la siguiente información a tu instructor o instructora:
 
-* Database server IP/FQDN
-* Database name to be used
-* Database username and password to access the database
+* La IP/FQDN del servidor de base de datos
+* El nombre que debes usar para la base de datos 
+* El nombre de usuario y contraseña para acceder a la base de datos
 
-This information will be used on the subsequent labs.
+Esta información se usará en los próximos laboratorios.
 
-Create a namespace for the wordpress implementation and set it as the current namespace:
+Crea un namespace para la implementación en Wordpress y configúralo como el namespace actual:
 
 ```bash
 kubectl create namespace wordpress-apps
 kubectl config set-context --current --namespace=wordpress-apps
 ```
 
-## Creating a wordpress pod
+## Crear un pod de Wordpress
 
-Access Lab02 folder containing some helper files:
+Abre la carpeta del Lab02, que contiene algunos archivos de ayuda:
 
 ```bash
 cd ~/kubernetes-lab/Lab02
 ```
 
-Edit the wordpress-pod.yml file adding the required information on the file. Once done, apply the created file and check if the pod started correctly by:
+Edita el archivo wordpress-pod.yml, añadiendo la información solicitada en el archivo. Luego, aplica el archivo creado y revisa que el pod haya empezado correctamente. Debes:
 
-* Getting all the pods on the current namespace wordpress-apps and checking the status
-* Checking the logs for the created pod.
-(Use the commands already used on previous exercises)
+* Obtener todos los pods en el namespace wordpress-apps actual y revisar sus estados
+* Revisar los logs para el pod que creaste.
+(Para esto, usa los comandos que ya usaste en ejercicios anteriores)
 
-If the pod is not starting or is having an error, review the configuration and ask the instructor for assistance if the problem persists.
+Si el pod no empieza correctamente o presenta algún error, revisa la configuración y, si el problema persiste, pide ayuda a tu instructor o instructora.
