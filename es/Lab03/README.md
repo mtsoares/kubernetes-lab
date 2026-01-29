@@ -36,41 +36,41 @@ En la columna PORT del servicio creado, notarás que un puerto de nodos se ha se
 
 Ahora, desde un navegador, intenta acceder al pod nginx pod usando http://\<YOUR VM FQDN OR IP\>:3XXXX (reemplaza 3XXXX por el puerto listado en el comando anterior). Debería aparecer una página web de "Welcome to NGINX".
 
-*DESAFÍO*: usando la documentación en https://kubernetes.io/docs/reference/kubernetes-api/service-resources/service-v1/, intenta hacer que el NodePort sea FIXED y no RANDOM.
+*DESAFÍO*: usando la documentación en https://kubernetes.io/docs/reference/kubernetes-api/service-resources/service-v1/, intenta hacer que el NodePort sea FIJO y no ALEATORIO.
 
-No other actions will be taken with the nginx pod, but if you want to try other additional configurations ask the instructor for examples or try it yourself.
+No se realizarán otras acciones con el pod nginx, pero si quieras probar otras configuraciones adicionales, pide ejemplos a tu instructor/a, o bien o pruébalo tú mismo/a.
 
-## Exposing the Wordpress pod to be accessed over the internet using a default HTTP port and Ingress
+## Exponer el pod de Wordpress para que se pueda acceder en internet usando un puerto HTPP predeterminado y Entrada
 
-Change to the wordpress-apps namespace using:
+Cambia al namespace wordpress-apps usando:
 
 ```bash
 kubectl config set-context --current --namespace=wordpress-apps
 ```
 
-On the Lab03 lab directory, edit the wordpress-service.yml file and change the appropriate information:
+En el directorio del Lab03, edita el archivo wordpress-service.yml y cambia la información apropiada:
 * Service type should be ClusterIP. Ths will allow the service to be used by the ingress that will be created next.
 * Make sure the Pod Selector is configured with the label the wordpress pod is using.
 * You can check the Pod Selector by checking the applied yml file for the pod or using kubectl describe pod \<PODNAME\>
 
-Apply the file and check if the service is up:
+Aplica el archivo y comprueba que el servicio esté activo:
 
 ```bash
 kubectl get services
 ```
 
-In case you need assistance, ask your instructor.
+Si necesitas ayuda, pídele a tu instructor o instructora.
 
-On the Lab03 lab directory, edit the wordpress-ingress.yml file and change the appropriate information:
-* Provided Wordpress FQDN for this student (each student have a unique FQDN)
-* Name of the service created previously
-* Port for the service created previously
+En el directorio del Lab03, edita el archivo wordpress-ingress.yml y cambia la información apropiada:
+* FQDN de Wordpress para ese estudiante (cada estudiante tiene un FQDN único)
+* Nombre del servicio creado anteriormente
+* Puerto del servicio creado anteriormente
 
-Apply the wordpress-ingress.yml file and check if the ingress was correctly configured:
+Aplica el archivo wordpress-ingress.yml y revisa si la entrada se configuró correctamente:
 
 ```bash
 kubectl get ingress
 ```
 
-Open a browser tab and try to access http://\<WORDPRESS_FQDN\>. Complete the Wordpress setup (writing down on notepad the username and password configred) and test the login to the http://\<WORDPRESS_FQDN\>/wp-admin URL.
+Abre una pestaña en un navegador e intenta acceder a http://\<WORDPRESS_FQDN\>. Completa el setup de Wordpress (escribiendo en notepad el nombre de usuario y contraseña configurada) y prueba el login a http://\<WORDPRESS_FQDN\>/wp-admin URL.
 
