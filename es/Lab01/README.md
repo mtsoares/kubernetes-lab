@@ -1,57 +1,57 @@
 # Lab 01
 
-On this lab, we will be installing a simple single-node Kubenetes cluster using K3s distribution. For more details about K3s, check the official documentation: https://k3s.io/ (not mandatory for the lab).
+En este lab, instalaremos un clúster sencillo de un solo nodo de Kubernetes, usando la distribución K3s. Para más información sobre K3s, consulta la documentación oficial: https://k3s.io/ (no es obligatorio para este lab).
 
-Information needed from your instructor:
-* IP and FQDN for your lab instance.
-* SSH private key allowing SSH connection to the lab instance.
-* Username to access the instance. This lab guide assumes the username is "ubuntu".
-* Database server name and admin password. 
+Necesitarás la siguiente información de tu instructor/a:
+* Un IP y un FQDN para tu instancia de lab.
+* Una clave privada de SSH que permita la conexión SSH a tu instancia de lab.
+* Un nombre de usuario para ingresar en la instancia. Este lab asume que el nombre de usuario es "ubuntu".
+* Un nombre de servidor de base de datos y una contraseña de administrador. 
 
-The manual uses "nano" to edit files, but feel free to use any other text editor of choice.
+Este manual usa "nano" para editar archivos, pero puedes usar el editor de texto que prefieras.
 
-Follow the instructions below for the installation and configuration.
+Sigue las instrucciones a continuación para la instalación y configuración.
 
-## Preparation
+## Preparación
 
-Before installing, a specific non-default configuration is needed to avoid certificate issues on future labs.
+Antes de la instación, necesitarás una configuración específica (no predeterminada) para evitar problemas con los certificados en labs futuros.
 
-Edit the following file (as root): 
+Edita el siguiente archivo (como root): 
 
 ```bash
 sudo mkdir -p /etc/rancher/k3s/
 sudo nano /etc/rancher/k3s/config.yaml 
 ```
 
-Add the below information on it, replacing \<FQDN\> by the lab VM FQDN provided by the instructor:
+Añade la siguiente información al archivo, reemplazando \<FQDN\> por el FQDN de la VM del lab (recuerda: este número te lo dará el instructor o instructora):
 
 ```yaml
 tls-san:
   - "<FQDN>"
 ```
 
-Save the file (CTRL+O) and exit (CTRL+X).
+Guarda el archivo (CTRL+O) y luego ciérralo (CTRL+X).
 
-Clone the lab repository on the "ubuntu" home directory:
+Clona el repositorio del lab en el directorio de inicio de «ubuntu»:
 
 ```bash
 cd ~
 git clone https://github.com/mtsoares/kubernetes-lab.git
 ```
 
-## Installation
+## Instalación
 
-On your SSH client logged into the Linux lab instance, execute the following command to install K3s and all kube* (kubeadm, kubectl) tools to manage it:
+Con tu cliente SHH logueado en la instancia del lab de Linux, ejecuta el siguiente comando para instalar el K3s y todas las herramientas de kube* (kubeadm, kubectl) para gestionarlo:
 
 ```bash
 curl -sfL https://get.k3s.io | INSTALL_K3S_VERSION=v1.27.9+k3s1 sh -
 ```
 
-*NOTE* The version is specified so all helm charts we install works correctly. Usually ther is no need to specify a k3s version to use the latest one.
+*NOTA* La versión se especifica para que todos los gráficos Helm que instalamos funcionen correctamente. Por lo general, no es necesario especificar una versión de k3s para usar la más reciente.
 
-*WARNING* The above command should not be executed in production. Read the documentation before performing it on production environments.
+*ADVERTENCIA* El comando anterior no debe ejecutarse en producción. Antes de realizarlo en entornos de producción, lee la documentación.
 
-After the installation is complete, the K3s cluster configuration file for access is located under the /etc folder on the linux VM. The following commands will create a .kube folder under the actual user directory, copy over the config file and set appropriate permissions.
+Una vez que la instalación se haya completado, el archivo de configuración del cluster K3s para acceder se ubica en la carpeta /etc en la VM de Linux. El siguiente comando creará una carpeta .kube dentro del directorio del usuario actual. Copia el archivo config y establece los permisos apropiados.
 
 ```bash
 mkdir ~/.kube
@@ -59,25 +59,25 @@ sudo cp /etc/rancher/k3s/k3s.yaml ~/.kube/config
 sudo chown ubuntu ~/.kube/config
 ```
 
-Now it is needed to set the correct environment variable so kubectl knows what config file to use:
+En este momento, será necesario establecer la variable de entorno correcta, para que el kubectl sepa qué archivo config usar:
 
 ```bash
 export KUBECONFIG=~/.kube/config
 ```
 
-Test if it is possible to check cluster information:
+Prueba si es posible verificar la información del cluster cluster:
 
 ```bash
 kubectl get nodes
 ```
 
-The next command will persist the KUBECONFIG environment variable so next time the "ubuntu" user logs in kubectl will still work:
+El siguiente comando perpetuará la variable de entorno KUBECONFIG para que la próxima vez que el usuario de "ubuntu" se loguee, el kubectl seguirá funcionando:
 
 ```bash
 echo -e "KUBECONFIG=/home/ubuntu/.kube/config" | sudo tee -a /etc/environment
 ```
 
-Execute each one of the following commands and analyze the output:
+Ejecuta cada uno de los siguientes comandos y analiza el output:
 
 ```bash
 kubectl cluster-info
@@ -87,10 +87,10 @@ kubectl get services --all-namespaces
 kubectl get pods -o wide --all-namespaces
 ```
 
-Using a txt file on your own computer answer the following (as the instructor if you are not sure about any question):
+En un archivo txt en tu propia computadora, responde las siguientes preguntas (si tienes dudas sobre alguna de ellas, puedes preguntarle a tu instructor/a):
 
-* How many namespaces are in the cluster?
-* What namespace have more pods on it?
-* Is the cluster using traefik or nginx as ingress controller?
-* How many nodes are in the cluster?
-* What are the node names? 
+* ¿Cuántos namespaces hay en el cluster?
+* ¿Qué namespace tiene más pods?
+* ¿El cluster está usando traefik o nginx como controlador de entrada?
+* ¿Cuántos nodos hay en el cluster?
+* ¿Cómo se llaman los nodos? 
