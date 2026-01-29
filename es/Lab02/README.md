@@ -1,10 +1,10 @@
 # Lab 02
 
-En este lab, crearemos un Pod de muestra y un Pod de Wordpress con acceso a una base de datos MySQL, lo que permitirá que Worpress funcione correctamente.
+En este lab, crearemos un Pod de muestra y un Pod de Wordpress con acceso a una base de datos MySQL, lo que permitirá que Worpress funcione de manera correcta.
 
 ## Crear un pod simple
 
-Crea un archivo llamado nginx-pod.yml usando un editor:
+Usando un editor, crea un archivo llamado nginx-pod.yml:
 
 ```bash
 nano nginx-pod.yml
@@ -29,7 +29,7 @@ Aplica el archivo:
 kubectl apply -f nginx-pod.yml
 ```
 
-Revisa que el pod con el nombre provisto haya empezado. Luego, revisa los detalles sobre este pod:
+Revisa que el pod con el nombre provisto se haya iniciado. Luego, revisa los detalles sobre este pod:
 
 ```bash
 kubectl get pods
@@ -42,41 +42,41 @@ Revisa los logs para el pod:
 kubectl logs PODNAME
 ```
 
-Revisa la información del the pod:
+Revisa la información del  pod:
 
 ```bash
 kubectl describe pod PODNAME
 ```
 
-Añade la siguiente sección de "metadata" y aplica el archivo usando el mismo comando anterior:
+Añade la siguiente sección de "metadata" y aplica el archivo usando el mismo comando de antes:
 
 ```yaml
   labels:
     app: nginx-pod
 ```
 
-Revisa los logs para cualquiera de los pods que tengan la etiqueta:
+Revisa los logs para cualquier pods que tenga la etiqueta:
 
 ```bash
 kubectl logs --selector app=nginx-pod
 ```
 
-Deja el of funcionando para un lab futuro.
+Deja el pod funcionando para un lab futuro.
 
 ## Preparación para la implementación en Wordpress
 
 Usando la documentación oficial de Docker para el contenedor de Wordpress en https://hub.docker.com/_/wordpress, encuentra y escribe las variables de entorno necesarias para una implementación exitosa en Worpress:
 
-* Variable para el servidor de base de datos hostname/IP
-* Variable para el nombre de usuario de la base de datos
-* Variable para la contraseña de usuario de la base de datos
-* Variable para el nombre de la base de datos en el servidor de base de datos
+* Variable para el servidor de base de datos hostname/IP.
+* Variable para el nombre de usuario de la base de datos.
+* Variable para la contraseña de usuario de la base de datos.
+* Variable para el nombre de la base de datos en el servidor de base de datos.
 
-Pide la siguiente información a tu instructor o instructora:
+Pide la siguiente información a tu instructor/a:
 
-* La IP/FQDN del servidor de base de datos
-* El nombre que debes usar para la base de datos 
-* El nombre de usuario y contraseña para acceder a la base de datos
+* La IP/FQDN del servidor de base de datos.
+* El nombre que debes usar para la base de datos.
+* El nombre de usuario y contraseña para acceder a la base de datos.
 
 Esta información se usará en los próximos laboratorios.
 
@@ -95,10 +95,10 @@ Abre la carpeta del Lab02, que contiene algunos archivos de ayuda:
 cd ~/kubernetes-lab/Lab02
 ```
 
-Edita el archivo wordpress-pod.yml, añadiendo la información solicitada en el archivo. Luego, aplica el archivo creado y revisa que el pod haya empezado correctamente. Debes:
+Edita el archivo wordpress-pod.yml, añadiendo la información solicitada en el archivo. Luego, aplica el archivo creado y revisa que el pod se haya iniciado de manera correcta. Debes:
 
-* Obtener todos los pods en el namespace wordpress-apps actual y revisar sus estados
+* Obtener todos los pods en el namespace wordpress-apps actual y revisar sus estados.
 * Revisar los logs para el pod que creaste.
 (Para esto, usa los comandos que ya usaste en ejercicios anteriores)
 
-Si el pod no empieza correctamente o presenta algún error, revisa la configuración y, si el problema persiste, pide ayuda a tu instructor o instructora.
+Si el pod no empieza de manera correcta o presenta algún error, revisa la configuración y, si el problema persiste, pide ayuda a tu instructor/a.
