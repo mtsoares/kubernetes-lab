@@ -1,6 +1,6 @@
 # Lab 03
 
-On this lab, external access will be provided for the example app and also for the Wordpress app using services and ingresses.
+En este lab, usaremos servicios y entradas para darle acceso externo a la app de ejemplo y también para la app de Wordpress.
 
 ## Preparation
 
