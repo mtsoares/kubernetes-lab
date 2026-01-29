@@ -1,6 +1,6 @@
 # Lab 02
 
-En este lab, se crearán un Pod de muestra y un Pod de Wordpress con acceso a una base de datos MySQL, lo que permitirá que Worpress funcione correctamente.
+En este lab, crearemos un Pod de muestra y un Pod de Wordpress con acceso a una base de datos MySQL, lo que permitirá que Worpress funcione correctamente.
 
 ## Crear un pod simple
 
