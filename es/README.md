@@ -1,6 +1,6 @@
 # Materiales de laboratorio para curso de Kubernetes
 
-Este proyecto tiene instrucciones de laboratorio y archivos de ayuda para realizar una serie de ejercicios sobre Kubernetes, de Básicos a Avanzados.
+Este proyecto tiene instrucciones de laboratorio y archivos de ayuda para realizar una serie de ejercicios (de Básicos a Avanzados) sobre Kubernetes.
 
 Sigue el orden de las sub-carpetas (Lab01, Lab02, etc) para poder ejecutar los pasos del laboratorio.
 
