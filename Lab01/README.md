@@ -1,6 +1,6 @@
 # Lab 01
 
-On this lab, we will be installing a simple single-node Kubenetes cluster using K3s distribution. For more details about K3s, check the official documentation: https://k3s.io/ (not mandatory for the lab).
+In this lab, we will be installing a simple single-node Kubenetes cluster using K3s distribution. For more details about K3s, check the official documentation: https://k3s.io/ (not mandatory for the lab).
 
 You need this information from your instructor:
 * An IP and an FQDN for your lab instance.
