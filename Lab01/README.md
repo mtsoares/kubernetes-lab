@@ -51,7 +51,7 @@ curl -sfL https://get.k3s.io | INSTALL_K3S_VERSION=v1.27.9+k3s1 sh -
 
 *WARNING* The above command should not be executed in production. Before performing it on production environments, read the documentation first.
 
-Once installation is complete, the K3s cluster configuration file to access is located under the /etc folder on the linux VM. The following commands will create a .kube folder under the actual user directory. Copy over the config file and set appropriate permissions.
+Once installation is complete, the configuration file to access the K3s cluster is located under the /etc folder on the linux VM. The following commands will create a .kube folder under the actual user directory. Copy over the config file and set appropriate permissions.
 
 ```bash
 mkdir ~/.kube
