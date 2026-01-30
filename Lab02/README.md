@@ -1,16 +1,16 @@
 # Lab 02
 
-In this lab, a sample Pod and a Wordpress Pod will be created with access to a MySQL database, enabling Worpress to run successfully.
+In this lab, we will create two pods: a sample pod and a WordPress pod with access to a MySQL database, enabling WordPress to run successfully.
 
 ## Create a simple pod
 
-Create a file called nginx-pod.yml using an editor:
+Using a text editor, create a file called nginx-pod.yml:
 
 ```bash
 nano nginx-pod.yml
 ```
 
-Add the following to the file, using the latest version of the official nginx pod on the Docker Hub:
+Add the following command to the file, using the latest version of the official nginx pod on the Docker Hub:
 
 ```yaml
 apiVersion: v1
@@ -29,14 +29,14 @@ Apply the file:
 kubectl apply -f nginx-pod.yml
 ```
 
-Check if the pod with the name provided have started and check details about the pod:
+Check whether the pod with the provided name has started, and check its details:
 
 ```bash
 kubectl get pods
 kubectl get pods -o wide
 ```
 
-Check logs for the pod:
+Check the pod's logs:
 
 ```bash
 kubectl logs PODNAME
@@ -48,14 +48,14 @@ Check the pod information:
 kubectl describe pod PODNAME
 ```
 
-Add the following to the Pod "metadata" section and apply the file using the same command used previously:
+In the Pod's "metadata" section,  add the following command. Then, apply the file using the same command you used before:
 
 ```yaml
   labels:
     app: nginx-pod
 ```
 
-Check logs for any pods that have that label:
+Check the logs for any pods that have this label:
 
 ```bash
 kubectl logs --selector app=nginx-pod
@@ -65,20 +65,20 @@ Leave the pod running for a later lab.
 
 ## Preparation for the Wordpress implementation
 
-Using the official documentation for the Wordpress container by Docker on https://hub.docker.com/_/wordpress, find and write down the environment variables  that are needed for a successful Wordpress implementation:
+Using the official documentation for the Wordpress container by Docker on https://hub.docker.com/_/wordpress, find and write down the environment variables needed for a successful Wordpress implementation:
 
-* Variable for the database server hostname/IP
-* Variable for the database username
-* Variable for the database user password
-* Variable for the database name on the database server
+* Variable for the database server hostname/IP.
+* Variable for the database username.
+* Variable for the database user password.
+* Variable for the database name on the database server.
 
 Ask your instructor for the following information:
 
-* Database server IP/FQDN
-* Database name to be used
-* Database username and password to access the database
+* An IP/FQDN for the Database server.
+* The name of the Database you should use.
+* A username and a password to access the Database.
 
-This information will be used on the subsequent labs.
+This information will be used in future labs.
 
 Create a namespace for the wordpress implementation and set it as the current namespace:
 
@@ -89,16 +89,16 @@ kubectl config set-context --current --namespace=wordpress-apps
 
 ## Creating a wordpress pod
 
-Access Lab02 folder containing some helper files:
+Access the folder Lab02, which contains some helper files:
 
 ```bash
 cd ~/kubernetes-lab/Lab02
 ```
 
-Edit the wordpress-pod.yml file adding the required information on the file. Once done, apply the created file and check if the pod started correctly by:
+Edit the wordpress-pod.yml file adding the required information to it. Once you have finished, apply the created file and check if the pod has started correctly by:
 
-* Getting all the pods on the current namespace wordpress-apps and checking the status
+* Getting all the pods on the current namespace wordpress-apps and checking their status.
 * Checking the logs for the created pod.
-(Use the commands already used on previous exercises)
+(Use the same commands you already used in previous exercises.)
 
-If the pod is not starting or is having an error, review the configuration and ask the instructor for assistance if the problem persists.
+If the pod is not starting or is having an error, review the configuration. If the problem persists, ask your the instructor for help.
