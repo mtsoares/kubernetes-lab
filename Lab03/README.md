@@ -1,6 +1,6 @@
 # Lab 03
 
-In this lab, external access will be provided for both the example app and the WordPress app via services and ingress.
+In this lab, we will provide external access for both the example app and the WordPress app via services and ingress.
 
 ## Preparation
 
