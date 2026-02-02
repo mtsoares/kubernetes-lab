@@ -1,6 +1,6 @@
 # Lab 02
 
-En este lab, crearemos un Pod de muestra y un Pod de Wordpress con acceso a una base de datos MySQL, lo que permitirá que Worpress funcione de manera correcta.
+En este lab, crearemos un Pod de ejemplo y un Pod de Wordpress con acceso a una base de datos MySQL, lo que permitirá que Wordpress funcione de manera correcta.
 
 ## Crear un pod simple
 
@@ -10,7 +10,7 @@ Usando un editor, crea un archivo llamado nginx-pod.yml:
 nano nginx-pod.yml
 ```
 
-Añade el siguiente comando al archivo, usando la última versión del pod oficial nginx en el Hub de Docker:
+Añade el siguiente contenido al archivo, usando la última versión del pod oficial nginx en el Hub de Docker:
 
 ```yaml
 apiVersion: v1
@@ -42,13 +42,13 @@ Revisa los logs para el pod:
 kubectl logs PODNAME
 ```
 
-Revisa la información del  pod:
+Revisa la información del pod:
 
 ```bash
 kubectl describe pod PODNAME
 ```
 
-Añade la siguiente sección de "metadata" y aplica el archivo usando el mismo comando de antes:
+Añade el suguiente contenido a la sección de "metadata" del pod y aplica el archivo usando el mismo comando de antes:
 
 ```yaml
   labels:
@@ -67,7 +67,7 @@ Deja el pod funcionando para un lab futuro.
 
 Usando la documentación oficial de Docker para el contenedor de Wordpress en https://hub.docker.com/_/wordpress, encuentra y escribe las variables de entorno necesarias para una implementación exitosa en Worpress:
 
-* Variable para el servidor de base de datos hostname/IP.
+* Variable para el hostname/IP del servidor de base de datos.
 * Variable para el nombre de usuario de la base de datos.
 * Variable para la contraseña de usuario de la base de datos.
 * Variable para el nombre de la base de datos en el servidor de base de datos.
