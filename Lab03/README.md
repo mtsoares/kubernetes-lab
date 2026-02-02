@@ -34,7 +34,7 @@ kubectl get services
 
 Under the PORT column of the service you just created, you will notice that a node port was randomly selected (it will appear as 80:3XXXX/TCP, where 3XXXX is the TCP port exposed on the Kubernetes node). Write down the configured TCP port on your notepad.
 
-Now, from a web browser, try to access the nginx pod using http://\<YOUR VM FQDN OR IP\>:3XXXX (replace 3XXXX by the port listed on the previous command). A "Welcome do NGINX" web page should appear.
+Now, from a web browser, try to access the nginx pod using http://\<YOUR VM FQDN OR IP\>:3XXXX (replace 3XXXX by the port listed on the previous command). A "Welcome to NGINX" web page should appear.
 
 *CHALLENGE*: using the documentation on https://kubernetes.io/docs/reference/kubernetes-api/service-resources/service-v1/, try to make the nodePort FIXED and not RANDOM.
 
@@ -51,7 +51,7 @@ kubectl config set-context --current --namespace=wordpress-apps
 On the Lab03 directory, edit the wordpress-service.yml file and change the appropriate information:
 * Service type should be ClusterIP. Ths will allow the service to be used by the ingress that will be created next.
 * Make sure the Pod Selector is configured with the same label that the wordpress pod is using.
-* You can check the Pod Selector by checking the applied yml file for the pod or using kubectl describe pod \<PODNAME\>
+* You can check the Pod Selector by checking the applied yml file for the pod or using: kubectl describe pod \<PODNAME\>.
 
 Apply the file and check if the service is up:
 
@@ -62,7 +62,7 @@ kubectl get services
 If you need any help, ask your instructor.
 
 On the Lab03 directory, edit the wordpress-ingress.yml file and change the appropriate information:
-* Provided Wordpress FQDN for this student (each student have a unique FQDN).
+* The Wordpress FQDN provided for this student (each student have a unique FQDN).
 * The name of the service you created before.
 * The Port for the service you created before.
 
