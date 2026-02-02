@@ -1,57 +1,57 @@
 # Lab 01
 
-On this lab, we will be installing a simple single-node Kubenetes cluster using K3s distribution. For more details about K3s, check the official documentation: https://k3s.io/ (not mandatory for the lab).
+Neste lab, instalaremos um cluster de Kubernetes simples de um único nó, usando a distribuição K3s. Para mais detalhes sobre K3s, consulte a documentação oficial: https://k3s.io/ (isso não é obrigatório para este lab).
 
-Information needed from your instructor:
-* IP and FQDN for your lab instance.
-* SSH private key allowing SSH connection to the lab instance.
-* Username to access the instance. This lab guide assumes the username is "ubuntu".
-* Database server name and admin password. 
+Você vai precisar das seguintes informações do seu instrutor ou da sua instrutora:
+* Um IP e um FQDN para a instância do lab.
+* Uma chave privada SSH que permita a conexão SSH na instância do lab.
+* Um nome de usuário para acessar a instância. (Este manual pressupõe que o nome de usuário será “ubuntu”).
+* Um nome de servidor de banco de dados e uma senha de admin. 
 
-The manual uses "nano" to edit files, but feel free to use any other text editor of choice.
+Este manual usa “nano” para editar arquivos, mas você pode usar qualquer editor de texto de sua preferência.
 
-Follow the instructions below for the installation and configuration.
+Siga as instruções a seguir para a instalação e configuração.
 
-## Preparation
+## Preparação
 
-Before installing, a specific non-default configuration is needed to avoid certificate issues on future labs.
+Antes da instalação, você vai precisar de uma configuração específica (não padrão) para evitar problemas com certificados em labs futuros.
 
-Edit the following file (as root): 
+Edite o seguinte arquivo (como root): 
 
 ```bash
 sudo mkdir -p /etc/rancher/k3s/
 sudo nano /etc/rancher/k3s/config.yaml 
 ```
 
-Add the below information on it, replacing \<FQDN\> by the lab VM FQDN provided by the instructor:
+Adicione as informações a seguir, substituindo \<FQDN\> pelo FQDN da VM desse lab, fornecido pelo instrutor ou instrutora:
 
 ```yaml
 tls-san:
   - "<FQDN>"
 ```
 
-Save the file (CTRL+O) and exit (CTRL+X).
+Salve o arquivo (CTRL+O) e saia (CTRL+X).
 
-Clone the lab repository on the "ubuntu" home directory:
+Clone o repositório do lab no diretório home “ubuntu”:
 
 ```bash
 cd ~
 git clone https://github.com/mtsoares/kubernetes-lab.git
 ```
 
-## Installation
+## Instalação
 
-On your SSH client logged into the Linux lab instance, execute the following command to install K3s and all kube* (kubeadm, kubectl) tools to manage it:
+No seu cliente SSH conectado à instância de Linux desse lab, execute o seguinte comando para instalar o K3s e todas as ferramentas kube* para administrá-lo (kubeadm, kubectl):
 
 ```bash
 curl -sfL https://get.k3s.io | INSTALL_K3S_VERSION=v1.27.9+k3s1 sh -
 ```
 
-*NOTE* The version is specified so all helm charts we install works correctly. Usually ther is no need to specify a k3s version to use the latest one.
+*NOTA:* A versão está especificada para que todos os Helm charts que vamos instalamos funcionem corretamente. Normalmente, não é necessário especificar uma versão do k3s para que a mais recente seja usada.
 
-*WARNING* The above command should not be executed in production. Read the documentation before performing it on production environments.
+*AVISO:* O comando acima não deve ser executado em produção. Antes de executá-lo em ambientes de produção, leia primeiro a documentação.
 
-After the installation is complete, the K3s cluster configuration file for access is located under the /etc folder on the linux VM. The following commands will create a .kube folder under the actual user directory, copy over the config file and set appropriate permissions.
+Quando a instalação estiver concluída, o arquivo de configuração para acessar o cluster K3s está na pasta /etc na VM de Linux. Os comandos a seguir criarão uma pasta .kube no diretório do usuário atual. Copie o arquivo config e defina as permissões apropriadas.
 
 ```bash
 mkdir ~/.kube
@@ -59,25 +59,25 @@ sudo cp /etc/rancher/k3s/k3s.yaml ~/.kube/config
 sudo chown ubuntu ~/.kube/config
 ```
 
-Now it is needed to set the correct environment variable so kubectl knows what config file to use:
+Agora, você deverá definir a variável de ambiente correta, para que o kubectl saiba qual arquivo config usar:
 
 ```bash
 export KUBECONFIG=~/.kube/config
 ```
 
-Test if it is possible to check cluster information:
+Teste para ver se é possível verificar as informações do cluster:
 
 ```bash
 kubectl get nodes
 ```
 
-The next command will persist the KUBECONFIG environment variable so next time the "ubuntu" user logs in kubectl will still work:
+O comando a seguir manterá a variável de ambiente KUBECONFIG. Isso significa que, na próxima vez que o usuário “ubuntu” fizer login, o kubectl ainda estará funcionando:
 
 ```bash
 echo -e "KUBECONFIG=/home/ubuntu/.kube/config" | sudo tee -a /etc/environment
 ```
 
-Execute each one of the following commands and analyze the output:
+Execute cada um dos comandos a seguir e analise os resultados:
 
 ```bash
 kubectl cluster-info
@@ -87,10 +87,16 @@ kubectl get services --all-namespaces
 kubectl get pods -o wide --all-namespaces
 ```
 
-Using a txt file on your own computer answer the following (as the instructor if you are not sure about any question):
+Usando um arquivo txt no seu próprio computador, responda às seguintes perguntas (se não tiver certeza sobre alguma delas, pergunte ao seu instrutor ou à sua instrutora):
 
-* How many namespaces are in the cluster?
-* What namespace have more pods on it?
-* Is the cluster using traefik or nginx as ingress controller?
-* How many nodes are in the cluster?
-* What are the node names? 
+* Quantos namespaces existem no cluster?
+* Qual namespace tem mais pods?
+* O cluster está usando traefik ou nginx como Ingress Controller?
+* Quantos nós existem no cluster?
+* Quais são os nomes dos nós? 
+
+## Desafio
+
+Usando as informações reunidas até agora, tente configurar seu computador pessoal para acessar o cluster que você acabou de instalar usando o kubectl. Se precisar de ajuda, peça ao seu instrutor ou à sua instrutora. No link a seguir tem algumas referências que podem te ajudar:
+
+* https://kubernetes.io/docs/tasks/tools/
