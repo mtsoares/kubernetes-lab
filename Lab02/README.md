@@ -2,7 +2,7 @@
 
 In this lab, we will create two pods: a sample pod and a WordPress pod with access to a MySQL database, enabling WordPress to run successfully.
 
-## Create a simple pod
+## Creating a simple pod
 
 Using a text editor, create a file called nginx-pod.yml:
 
@@ -48,7 +48,7 @@ Check the pod information:
 kubectl describe pod PODNAME
 ```
 
-In the Pod's "metadata" section,  add the following command. Then, apply the file using the same command you used before:
+Add the following content to the Pod's "metadata" section. Then, apply the file using the same command you used before:
 
 ```yaml
   labels:
@@ -87,7 +87,7 @@ kubectl create namespace wordpress-apps
 kubectl config set-context --current --namespace=wordpress-apps
 ```
 
-## Creating a wordpress pod
+## Creating a Wordpress pod
 
 Access the folder Lab02, which contains some helper files:
 
