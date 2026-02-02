@@ -4,8 +4,8 @@ In this lab, we will be installing a simple single-node Kubenetes cluster using 
 
 You need this information from your instructor:
 * An IP and an FQDN for your lab instance.
-* an SSH private key allowing SSH connection to the lab instance.
-* A Username to access the instance. This lab guide assumes the username is "ubuntu".
+* An SSH private key allowing SSH connection to the lab instance.
+* A Username to access the instance. (This lab guide assumes the username is "ubuntu").
 * A Database server name and an admin password. 
 
 This manual uses "nano" to edit files, but feel free to use any other text editor of choice.
@@ -47,11 +47,11 @@ On your SSH client logged into the Linux lab instance, execute the following com
 curl -sfL https://get.k3s.io | INSTALL_K3S_VERSION=v1.27.9+k3s1 sh -
 ```
 
-*NOTE* The version is specified so that all the Helm charts we install work correctly. Usually, there is no need to specify a k3s version in order to use the latest one.
+*NOTE:* The version is specified so that all the Helm charts we install work correctly. Usually, there is no need to specify a k3s version in order to use the latest one.
 
-*WARNING* The above command should not be executed in production. Before performing it on production environments, read the documentation first.
+*WARNING:* The above command should not be executed in production. Before performing it on production environments, read the documentation first.
 
-Once installation is complete, the configuration file to access the K3s cluster is located under the /etc folder on the linux VM. The following commands will create a .kube folder under the actual user directory. Copy over the config file and set appropriate permissions.
+Once installation is complete, the configuration file to access the K3s cluster is located under the /etc folder on the linux VM. The following commands will create a .kube folder under the current user directory. Copy over the config file and set appropriate permissions.
 
 ```bash
 mkdir ~/.kube
