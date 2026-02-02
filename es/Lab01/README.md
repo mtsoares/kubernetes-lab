@@ -1,6 +1,6 @@
 # Lab 01
 
-En este lab, instalaremos un cluster sencillo de un solo nodo de Kubernetes, usando la distribución K3s. Para más información sobre K3s, consulta la documentación oficial: https://k3s.io/ (no es obligatorio para este lab).
+En este lab, instalaremos un cluster de Kubernetes sencillo de un solo nodo, usando la distribución K3s. Para más información sobre K3s, consulta la documentación oficial: https://k3s.io/ (no es obligatorio para este lab).
 
 Necesitarás pedirle la siguiente información a tu instructor/a:
 * Una IP y un FQDN para tu instancia de lab.
@@ -23,7 +23,7 @@ sudo mkdir -p /etc/rancher/k3s/
 sudo nano /etc/rancher/k3s/config.yaml 
 ```
 
-Añade la siguiente información al archivo, reemplazando \<FQDN\> por el FQDN de la VM del lab (recuerda: este número te lo dará el instructor/a):
+Añade la siguiente información al archivo, reemplazando \<FQDN\> por el FQDN de la VM del lab (recuerda: esta información te la dará el instructor/a):
 
 ```yaml
 tls-san:
@@ -32,7 +32,7 @@ tls-san:
 
 Guarda el archivo (CTRL+O) y luego ciérralo (CTRL+X).
 
-Clona el repositorio del lab en el directorio de inicio de «ubuntu»:
+Clona el repositorio del lab en el directorio home de "ubuntu":
 
 ```bash
 cd ~
@@ -41,17 +41,17 @@ git clone https://github.com/mtsoares/kubernetes-lab.git
 
 ## Instalación
 
-Con tu cliente SHH logueado en la instancia del lab de Linux, ejecuta el siguiente comando para instalar el K3s y todas las herramientas de kube* (kubeadm, kubectl) para admnistrarlo:
+Con tu cliente SSH logueado en la instancia del lab de Linux, ejecuta el siguiente comando para instalar el K3s y todas las herramientas de kube* (kubeadm, kubectl) para admnistrarlo:
 
 ```bash
 curl -sfL https://get.k3s.io | INSTALL_K3S_VERSION=v1.27.9+k3s1 sh -
 ```
 
-*NOTA:* La versión se especifica para que todos los gráficos Helm que instalamos funcionen de manera correcta. Por lo general, no hace falta especificar una versión de k3s para usar la más reciente.
+*NOTA:* La versión se especifica para que todos los  Helm charts que instalamos funcionen de manera correcta. Por lo general, no hace falta especificar una versión de k3s para usar la más reciente.
 
 *ADVERTENCIA:* El comando anterior no se debe ejecutar en producción. Antes de realizarlo en entornos de producción, lee la documentación.
 
-Una vez que se haya completado la instalación, el archivo de configuración del cluster K3s para acceder se ubica en la carpeta /etc en la VM de Linux. El siguiente comando creará una carpeta .kube dentro del directorio del usuario actual. Copia el archivo config y establece los permisos apropiados.
+Una vez que se haya completado la instalación, el archivo de configuración para acceder al cluster K3s se ubica en la carpeta /etc en la VM de Linux. El siguiente comando creará una carpeta .kube dentro del directorio del usuario actual. Copia el archivo config y establece los permisos apropiados.
 
 ```bash
 mkdir ~/.kube
@@ -91,6 +91,6 @@ En un archivo txt en tu propia computadora, responde las siguientes preguntas (s
 
 * ¿Cuántos namespaces hay en el cluster?
 * ¿Qué namespace tiene más pods?
-* ¿El cluster está usando traefik o nginx como controlador de entrada?
+* ¿El cluster está usando traefik o nginx como ingress controller?
 * ¿Cuántos nodos hay en el cluster?
 * ¿Cómo se llaman los nodos? 
