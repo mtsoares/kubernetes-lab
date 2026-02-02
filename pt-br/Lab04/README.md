@@ -1,47 +1,47 @@
 # Lab 04
 
-In this lab, we will work with data persistence on the Wordpress Pod we have created in Lab 02.
+Neste lab, vamos trabalhar com persistência de dados no Pod de Wordpress que criamos no Laboratório 02.
 
-## Creating a Persistent Volume Claim
+## Criando uma Volume Claim persistente
 
-Make sure you are using the wordpress-apps namespace:
+Verifique se você está usando o wordpress-apps namespace:
 
 ```bash
 kubectl config set-context --current --namespace=wordpress-apps
 kubectl config get-contexts
 ```
 
-Get the Storage Classes present on the cluster with:
+Obtenha as Storage Classes presentes no cluster com:
 
 ```bash
 kubectl get storageclasses
 ```
 
-Write down the name of the class available on your notepad, as it will be used later.
+Anote o nome da classe disponível no seu Notepad (pois ela será usado no futuro).
 
-Move to the folder for Lab04:
+Vá para a pasta do Lab04:
 
 ```bash
 cd ~/kubernetes-lab/Lab04
 ```
 
-Edit the wordpress-pvc.yml file, changing the values where requested. Apply the file and check if the PVC was created with:
+Edite o arquivo wordpress-pvc.yml, alterando os valores onde for pedido. Aplique o arquivo e verifique se o PVC foi criado com:
 
 ```bash
 kubectl get pvc
 ```
 
-The PVC status should be PENDING (this will change once a pod is attached to it). Write down the PVC name on the notepad as it will be used in the next task.
+O status do PVC deve ser PENDING (isso mudará quando um pod for anexado a ele). Anote o nome do PVC no seu Notepad, pois ele será usado no próximo exercício.
 
-## Adding the PVC to the actual Wordpress Pod
+## Adicionando o PVC ao Pod de Wordpress atual
 
-The same configuration file used on Lab 02 will be changed. Edit the file with:
+O mesmo arquivo de configuração usado no Lab 02 será alterado. Edite o arquivo com:
 
 ```bash
 nano ~/kubernetes-lab/Lab02/wordpress-pod.yml
 ```
 
-Add the following command under the "spec" for the pod:
+Adicione o seguinte conteúndo em “spec” para o pod:
 
 ```yaml
   volumes:
@@ -50,7 +50,7 @@ Add the following command under the "spec" for the pod:
         claimName: <PUT_HERE_THE_PVC_NAME>
 ```
 
-Add the following command under the "container" for the pod:
+Adicione o seguinte conteúdo sob o “container” para o pod:
 
 ```yaml
     volumeMounts:
@@ -58,24 +58,24 @@ Add the following command under the "container" for the pod:
       name:  <VOLUME_NAME_JUST_CREATED>
 ```
 
-Save the pod file.
+Salve o arquivo pod.
 
-Delete the wordpress pod by running:
+Exclua o pod de WordPress executando:
 
 ```bash
 kubectl delete pod \<WORDPRESS_POD_NAME\>
 ```
 
-Apply the file you just created, with the volume mount, so a new pod is created:
+Aplique o arquivo que você acabou de criar, com o volume mount, para criar um novo pod:
 
 ```bash
 kubectl apply -f ~/kubernetes-lab/Lab02/wordpress-pod.yml
 ```
 
-In a web browser, test if the Wordpress site is working using the http://\<STUDENT_WORDPRESS_URL\>. Perform the following actions:
+Em um navegador web, teste se o site Wordpress está funcionando usando o http://\<STUDENT_WORDPRESS_URL\>. Execute as seguintes ações:
 
-* Login to wordpress and create a new post uploading an image file to it. Check if the post can be read and the image can be displayed.
-* Delete the Wordpress pod, and recreate it again.
-* Check if the page you just created still displays the uploaded image.
+* Faça login no WordPress e crie uma nova publicação, subindo um arquivo de imagem nela. Verifique se é possível ler a publicação e ver a imagem de forma correta.
+* Exclua o pod de Wordpress e depois crie ele novamente.
+* Verifique se a publicação que você acabou de criar ainda mostra a imagem que você enviou.
 
-If you need any help with the previous steps, ask your instructor.
+Se precisar de ajuda com as etapas anteriores, peça ajuda ao seu instrutor / instrutora.
