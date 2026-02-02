@@ -33,7 +33,7 @@ kubectl get pvc
 
 The PVC status should be PENDING (this will change once a pod is attached to it). Write down the PVC name on the notepad as it will be used in the next task.
 
-## Adding the PVC to the actual Wordpress Pod
+## Adding the PVC to the current Wordpress Pod
 
 The same configuration file used on Lab 02 will be changed. Edit the file with:
 
@@ -41,7 +41,7 @@ The same configuration file used on Lab 02 will be changed. Edit the file with:
 nano ~/kubernetes-lab/Lab02/wordpress-pod.yml
 ```
 
-Add the following command under the "spec" for the pod:
+Add the following content under the "spec" for the pod:
 
 ```yaml
   volumes:
@@ -50,7 +50,7 @@ Add the following command under the "spec" for the pod:
         claimName: <PUT_HERE_THE_PVC_NAME>
 ```
 
-Add the following command under the "container" for the pod:
+Add the following content under the "container" for the pod:
 
 ```yaml
     volumeMounts:
