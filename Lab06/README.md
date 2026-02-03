@@ -70,7 +70,7 @@ helm repo update
 helm install cert-manager jetstack/cert-manager --namespace cert-manager --create-namespace
 ```
 
-Create a namespace for the Rancher manager:
+Create a namespace for the Rancher Manager:
 
 ```bash
 kubectl create namespace cattle-system
