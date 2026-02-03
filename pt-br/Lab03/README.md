@@ -4,11 +4,11 @@ Neste lab, vamos fornecer acesso externo tanto para o app de exemplo quanto para
 
 ## Preparação
 
-Para este lab, peça ao seu ou à sua instrutora o FQDN do Wordpress que você deve usar.
+Para este lab, peça ao seu instrutor ou à sua instrutora o FQDN do Wordpress que você deverá usar.
 
 ## Criando um service de NodePort para o pod nginx de exemplo
 
-O pod Nginx de exemplo que criamos no lab anterior ainda está inacessível de qualquer lugar. Vamos criar um service de NodePort para expô-lo em um port TCP na faixa de 30000-32000 nos nós do Kubernetes.
+O pod Nginx de exemplo que criamos no lab anterior ainda não está acessível de nenhum lugar. Vamos criar um service de NodePort para expor ele em um port TCP na faixa de 30000-32000 nos nós do Kubernetes.
 
 Modifique o namespace de volta para o "default" e verifique que o pod nginx que você criou no Lab 02 está lá e funcionando de forma correta:
 
@@ -40,7 +40,7 @@ Agora, num navegador web, tente acessar o pod nginx usando http://\<YOUR VM FQDN
 
 Nenhuma outra ação será realizada com o pod nginx, mas se você quiser experimentar outras configurações adicionais, peça exemplos ao seu instrutor / instrutora ou experimente por conta própria.
 
-## Expondo o pod do WordPress para poder accesá-lo pela Internet usando o port HTTP padrão e um Ingress
+## Expondo o pod do WordPress para poder accesar ele pela Internet usando o port HTTP padrão e um Ingress
 
 Mude para o namespace wordpress-apps usando:
 
@@ -72,4 +72,4 @@ Aplique o arquivo wordpress-ingress.yml e verifique se o Ingress foi configurado
 kubectl get ingress
 ```
 
-Abra uma aba no navegador e tente acessar http://\<WORDPRESS_FQDN\>. Conclua a configuração do Wordpress (anotando no seu Notepad o nome de usuário e a senha configurados) e teste o fazer login na URL http://\<WORDPRESS_FQDN\>/wp-admin.
+Abra uma aba no navegador e tente acessar http://\<WORDPRESS_FQDN\>. Conclua a configuração do Wordpress (anotando no seu Notepad o nome de usuário e a senha configurados) e tente fazer login na URL http://\<WORDPRESS_FQDN\>/wp-admin.
