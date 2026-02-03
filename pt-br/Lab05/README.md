@@ -1,6 +1,6 @@
 # Lab 05
 
-Este lab vai mostrar como administrar uma implementação de Kubernetes, criando e escalando um app chamado "demoapp".
+Neste lab, vamos mostrar como administrar uma implementação de Kubernetes, criando e escalando um app chamado "demoapp".
 
 ## Preparação
 
