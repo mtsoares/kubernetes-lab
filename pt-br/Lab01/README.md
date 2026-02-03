@@ -87,7 +87,7 @@ kubectl get services --all-namespaces
 kubectl get pods -o wide --all-namespaces
 ```
 
-Usando um arquivo txt no seu próprio computador, responda às seguintes perguntas (se não tiver certeza sobre alguma delas, pergunte ao seu instrutor ou à sua instrutora):
+Usando um arquivo txt no seu próprio computador, responda às seguintes perguntas (se tiver dúvidas sobre alguma delas, pergunte ao seu instrutor ou à sua instrutora):
 
 * Quantos namespaces existem no cluster?
 * Qual namespace tem mais pods?
