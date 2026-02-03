@@ -67,8 +67,8 @@ Test the application by opening a browser and accessing http://\<DEMOAPP_FQDN\>/
 Edit the demoapp-deployment.yml file and change the replica amount from 1 to 3. Apply the file and:
 
 * Check if the number of replicas has changed using "kubectl get deployments".
-* Refresh the browser and check the Pod field. It should change to reflect which pod the application is running from..
-* Check the pod names doing a "kubectl get pods" and check if the pod names match those you see in the application.
+* Refresh the browser and check the Pod field. It should change to reflect which pod the application is running from.
+* Check the names of the pods doing a "kubectl get pods" and check if the pod names match those you see in the application.
 
 ## Creating a configMap for common configurations
 
@@ -80,7 +80,7 @@ Edit the demoapp-configmap.yml file and add the requested information about the 
 kubectl get configmaps
 ```
 
-Edit the demoapp-deployment.yml and remove the environment variable DATABASE_SERVER and its value. Add the following under the container configuration (right below the image configuration):
+Edit the demoapp-deployment.yml and remove the environment variable DATABASE_SERVER and its value. Add the following content under the container configuration (right below the image configuration):
 
 ```yaml
         envFrom:
@@ -94,7 +94,7 @@ Apply the configuration again and check if demoapp application still works, disp
 
 Secrets are useful tools to hide sensitive information on Kbernetes. In the demoapp, the DB password is stored as an environment variable, and it can be moved to a Secret.
 
-In order to store a secret, you need to encode the DB password using base64 algorithm. To do so, use the following command:
+In order to store a secret, you need to encode the DB password using a base64 algorithm. To do so, use the following command:
 
 ```bash
 printf '<PUT HERE THE DATABSAE PASSWORD>' | base64
@@ -124,7 +124,7 @@ Save and apply the file. test if the demoapp is still working correctly.
 
 ## Using ConfigMaps to mount files within the pod
 
-Configmaps can be used to store any kind of information. On this task, an html file will be configured as a configmap and injected on the Pods as a volume.
+Configmaps can be used to store any kind of information. On this task, an html file will be configured as a configmap injected on the Pods as a volume.
 
 Create an HTML file named index.html on the Linux VM with any information you want. Example below:
 
@@ -150,13 +150,13 @@ Create a configmap from the file created:
 kubectl create configmap demoapp-newindex-configmap --from-file ./index.html
 ```
 
-Check the configmap contents in YAML format
+Check the configmap contents in YAML format:
 
 ```bash
 kubectl get configmap demoapp-newindex-configmap -o yaml
 ```
 
-Add the following command right at the end of the demoapp-deployment.yml file:
+Add the following content right at the end of the demoapp-deployment.yml file:
 
 ```yaml
         volumeMounts:
