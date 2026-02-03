@@ -1,6 +1,6 @@
 # Lab 04
 
-Neste lab, vamos trabalhar com persistência de dados no Pod de Wordpress que criamos no Laboratório 02.
+Neste lab, vamos trabalhar com persistência de dados no Pod de Wordpress que criamos no Lab 02.
 
 ## Criando uma Volume Claim persistente
 
@@ -17,7 +17,7 @@ Obtenha as Storage Classes presentes no cluster com:
 kubectl get storageclasses
 ```
 
-Anote o nome da classe disponível no seu Notepad (pois ela será usado no futuro).
+Anote o nome da classe disponível no seu Notepad (pois ela será usada no futuro).
 
 Vá para a pasta do Lab04:
 
@@ -31,11 +31,11 @@ Edite o arquivo wordpress-pvc.yml, alterando os valores onde for pedido. Aplique
 kubectl get pvc
 ```
 
-O status do PVC deve ser PENDING (isso mudará quando um pod for anexado a ele). Anote o nome do PVC no seu Notepad, pois ele será usado no próximo exercício.
+O status do PVC deve ser PENDING (isso mudará quando um pod for anexado nele). Anote o nome do PVC no seu Notepad, pois ele será usado no próximo exercício.
 
 ## Adicionando o PVC ao Pod de Wordpress atual
 
-O mesmo arquivo de configuração usado no Lab 02 será alterado. Edite o arquivo com:
+O mesmo arquivo de configuração que você usou no Lab 02 será alterado. Edite o arquivo com:
 
 ```bash
 nano ~/kubernetes-lab/Lab02/wordpress-pod.yml
@@ -50,7 +50,7 @@ Adicione o seguinte conteúndo em “spec” para o pod:
         claimName: <PUT_HERE_THE_PVC_NAME>
 ```
 
-Adicione o seguinte conteúdo sob o “container” para o pod:
+Adicione o seguinte conteúdo no “container” para o pod:
 
 ```yaml
     volumeMounts:
@@ -74,7 +74,7 @@ kubectl apply -f ~/kubernetes-lab/Lab02/wordpress-pod.yml
 
 Em um navegador web, teste se o site Wordpress está funcionando usando o http://\<STUDENT_WORDPRESS_URL\>. Execute as seguintes ações:
 
-* Faça login no WordPress e crie uma nova publicação, subindo um arquivo de imagem nela. Verifique se é possível ler a publicação e ver a imagem de forma correta.
+* Faça login no WordPress e crie uma nova publicação, subindo um arquivo de imagem nela. Confira se é possível ler a publicação e ver a imagem de forma correta.
 * Exclua o pod de Wordpress e depois crie ele novamente.
 * Verifique se a publicação que você acabou de criar ainda mostra a imagem que você enviou.
 
