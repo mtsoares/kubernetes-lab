@@ -10,7 +10,7 @@ Usando um editor de texto, crie um arquivo chamado nginx-pod.yml:
 nano nginx-pod.yml
 ```
 
-Adicione o seguinte conteúdo ao arquivo, usando a versão mais recente do pod nginx official no Docker Hub:
+Adicione o seguinte conteúdo ao arquivo, usando a versão mais recente do pod nginx oficial no Docker Hub:
 
 ```yaml
 apiVersion: v1
