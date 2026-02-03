@@ -17,7 +17,7 @@ Acesse a pasta do Lab06, que contém os arquivos de configuração para as ferra
 cd ~/kubernetes-lab/Lab06/
 ```
 
-Instale a ferramenta helm na VM de Linux:
+Instale a ferramenta de helm na VM de Linux:
 
 ```bash
 sudo snap install helm --classic
@@ -49,7 +49,7 @@ kubectl get svc
 
 Procure um serviço chamado “prometheus-grafana” e verifique qual é o NodePort exposto para ele (deve ser 3XXXX). Abra um navegador e acesse http://\<VM_FQDN_OR_IP\>:\<NODEPORT\>. As credenciais são admin/prom-operator.
 
-Acesse o painel chamado “Kubernetes / Compute Resources / Cluster” e observe os dados exibidos. Como os painéis não estão configurados de forma correta, é possível que alguns dados não estejam sendo exibidos. Se você tiver conhecimento do Grafana, tente corrigir alguns dos widgets.
+Acesse o painel chamado “Kubernetes / Compute Resources / Cluster” e confira os dados exibidos. Como os painéis não estão configurados de forma correta, é possível que alguns dados não estejam sendo exibidos. Se você conhece Grafana, tente corrigir alguns dos widgets.
 
 Depois do teste, exlua o stack de monitoramento para economizar recursos do lab:
 
@@ -59,7 +59,7 @@ helm uninstall prometheus
 
 ## Instalando o Rancher Manager
 
-A comunidade Rancher Manager é uma ferramenta opensource que oferece uma UI gráfica para administrar vários clusters, incluindo aquele no qual o Manager for instalado.
+A comunidade Rancher Manager é uma ferramenta opensource que oferece uma UI gráfica para administrar vários clusters, incluindo aquele onde o Manager for instalado.
 
 Instale o cert-manager para que o Rancher possa gerar certificados:
 
@@ -90,7 +90,7 @@ Execute o seguinte comando para realizar a instalação:
 helm install rancher rancher-latest/rancher --namespace cattle-system --set hostname=<LAB_VM_FQDN> --set bootstrapPassword=admin123
 ```
 
-Espere até que todos os pods do Rancher estejam ativos, verificando com “kubectl get pods”. Isso pode demorar uns 20 minutos. Todos os pods devem estar no status “Successful” ou “Running”.
+Espere até que todos os pods do Rancher estejam ativos, conferindo com “kubectl get pods”. Isso pode demorar uns 20 minutos. Todos os pods devem estar no status “Successful” ou “Running”.
 
 Em um navegador web, acesse https://\<LAB_VM_FQDN\> e forneça a seguinte senha de bootstrap: admin123 (fornecida no comando de instalação). Crie um nome de usuário e uma senha, faça login e verifique o cluster “local”:
 
