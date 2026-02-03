@@ -29,7 +29,7 @@ Aplique o arquivo:
 kubectl apply -f nginx-pod.yml
 ```
 
-Verifique se o pod com o nome fornecido iniciou e veja os seus detalhes:
+Verifique se o pod com o nome fornecido iniciou e confira os seus detalhes:
 
 ```bash
 kubectl get pods
@@ -55,15 +55,15 @@ Adicione o seguinte conteúdo à seção “metadata” do Pod. Em seguida, apli
     app: nginx-pod
 ```
 
-Verifique os logs para ver se há algum pod com essa etiqueta:
+Verifique os logs para conferir se há algum pod com essa etiqueta:
 
 ```bash
 kubectl logs --selector app=nginx-pod
 ```
 
-Deixe o pod em execução para um lab posterior.
+Deixe o pod em execução para um lab futuro.
 
-## Preparação para a implementação do Wordpress
+## Preparando para a implementação do Wordpress
 
 Usando a documentação oficial do container de Wordpress da Docker em https://hub.docker.com/_/wordpress, encontre e anote as variáveis de ambiente necessárias para uma implementação correta do Wordpress:
 
@@ -78,9 +78,9 @@ Peça as seguintes informações ao seu instrutor ou à sua instrutora:
 * O nome do banco de dados que você deve usar.
 * Um nome de usuário e uma senha para acessar o banco de dados.
 
-Essas informações serão utilizadas em labs futuros.
+Você vai usar essas informações em labs futuros.
 
-Crie um namespace para a implementação do WordPress e defina-o como o namespace atual:
+Crie um namespace para a implementação do WordPress e defina ele como o namespace atual:
 
 ```bash
 kubectl create namespace wordpress-apps
@@ -98,7 +98,7 @@ cd ~/kubernetes-lab/Lab02
 Edite o arquivo wordpress-pod.yml adicionando as informações necessárias. Quando terminar, aplique o arquivo criado e verifique se o pod iniciou de forma correta:
 
 * Obtenha todos os pods no namespace wordpress-apps atual e verifique seus status.
-* Verificando os registros do pod que você criou.
+* Verifique os registros do pod que você criou.
 (Use os mesmos comandos que você já usou nos labs anteriores.)
 
 Se o pod não estiver iniciando ou tiver um erro, verifique a configuração. Se o problema persistir, peça ajuda ao seu instrutor ou à sua instrutora.
