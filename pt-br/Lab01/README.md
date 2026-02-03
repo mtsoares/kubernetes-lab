@@ -47,7 +47,7 @@ No seu cliente SSH conectado à instância de Linux desse lab, execute o seguint
 curl -sfL https://get.k3s.io | INSTALL_K3S_VERSION=v1.27.9+k3s1 sh -
 ```
 
-*NOTA:* A versão está especificada para que todos os Helm charts que vamos instalamos funcionem corretamente. Normalmente, não é necessário especificar uma versão do k3s para que a mais recente seja usada.
+*NOTA:* A versão está especificada para que todos os Helm charts que vamos instalamos funcionem de forma correta. Normalmente, não é necessário especificar uma versão do k3s para que a mais recente seja usada.
 
 *AVISO:* O comando acima não deve ser executado em produção. Antes de executá-lo em ambientes de produção, leia primeiro a documentação.
 
