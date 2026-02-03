@@ -1,6 +1,6 @@
 # Lab 01
 
-Neste lab, instalaremos um cluster de Kubernetes simples de um único nó, usando a distribuição K3s. Para mais detalhes sobre K3s, consulte a documentação oficial: https://k3s.io/ (isso não é obrigatório para este lab).
+Neste lab, vamos instalar um cluster de Kubernetes simples de um único nó, usando a distribuição K3s. Para mais detalhes sobre K3s, consulte a documentação oficial: https://k3s.io/ (isso não é obrigatório para este lab).
 
 Você vai precisar das seguintes informações do seu instrutor ou da sua instrutora:
 * Um IP e um FQDN para a instância do lab.
