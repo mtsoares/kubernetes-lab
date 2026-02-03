@@ -8,7 +8,7 @@ Você vai precisar das seguintes informações do seu instrutor ou da sua instru
 * Um nome de usuário para acessar a instância. (Este manual pressupõe que o nome de usuário será “ubuntu”).
 * Um nome de servidor de banco de dados e uma senha de admin. 
 
-Este manual usa “nano” para editar arquivos, mas você pode usar qualquer editor de texto de sua preferência.
+Este manual usa “nano” para editar arquivos, mas você pode usar o editor de texto que quiser.
 
 Siga as instruções a seguir para a instalação e configuração.
 
