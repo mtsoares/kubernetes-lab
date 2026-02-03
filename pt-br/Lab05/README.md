@@ -1,86 +1,86 @@
 # Lab 05
 
-This lab will show how to omanage a Kubernetes deployment, creating and scaling an app called demoapp.
+Este lab vai mostrar como administrar uma implementação de Kubernetes, criando e escalando um app chamado "demoapp".
 
-## Preparation
+## Preparação
 
-Ask your instructor for the following information:
+Peça as seguintes informações ao seu instrutor / instrutora:
 
-* demoapp FQDN for Ingress configuration
-* demoapp image URL
-* demoapp registry login credentials and server
+* Um FQDN para o demoapp, para a configuração do Ingress.
+* URL de imagem para o demoapp.
+* Credenciais e servidor para o registro do demoapp.
 
-demoapp uses the following environment variables for configuration:
+O demoapp usa as seguintes variáveis de ambiente para a configuração:
 
-* DATABASE_SERVER: mysql database server name already provided by the instructor on Lab 02
+* DATABASE_SERVER: Nome do servidor de banco de dados MySQL (já fornecido pelo instrutor no Lab 02).
 * DATABASE_USERNAME: demoappuser
 * DATABASE_PASSWORD: securepassword
 * DATABASE_NAME: demoappdb
 
-All 4 environment variables must be configured at the deployment on this lab.
+Todas as quatro variáveis de ambiente devem ser configuradas na implementação neste lab.
 
-## Create a namespace 
+## Criando um namespace 
 
-Create a namespace for the new app and switch to it:
+Crie um namespace para o novo app e mude para ele:
 
 ```bash
 kubectl create namespace demoapp
 kubectl config set-context --current --namespace=demoapp
 ```
 
-As the demoapp image is hosted on a container registry that is not the Docker Hub, and it is protected by password authentication, it is needed to explicitly tell any pod the credentials to login. To do so, use the following command to create a Docker Registry secret:
+Como a imagem do demoapp está hospedada em um registro de container que não é Docker Hub, e que ela está protegida por autenticação via senha, você precisa informar explicitamente a qualquer pod as credenciais para fazer login. Para isso, use o seguinte comando para criar um segredo de registro do Docker:
 
 ```bash
 kubectl create secret docker-registry \<PROVIDE A NAME FOR THE SECRET\> --docker-server=\<DOCKER_REGISTRY_SERVER\> --docker-username=\<DOCKER_REGISTRY_USERNAME\> --docker-password=\<DOCKER_REGISTRY_PASSWORD\>
 ```
 
-Check if the secret have been created with "kubectl get secrets" and write down its name.
+Verifique se o segredo foi criado com "kubectl get secrets" e anote seu nome.
 
-Change to Lab05 folder and edit the demoapp-deployment.yml file:
+Mude para a pasta do Lab05 e edite o arquivo demoapp-deployment.yml:
 
 ```bash
 cd ~/kubernetes-lab/Lab05
 nano demoapp-depoyment.yml
 ```
 
-Configure it adding the required information on the file. Then apply the file and check if the deployment and pods have started correctly:
+Configure ele adicionando as informações necessárias no arquivo. Em seguida, aplique o arquivo e verifique se a implementação e os pods iniciaram de forma correta:
 
 ```bash
 kubectl get deployments
 kubectl get pods
 ```
 
-## Enabling external access to demoapp
+## Habilitando o acesso externo ao demoapp
 
-Create a ClusterIP service for demoapp editing the demoapp-service.yml file, and then apply the service file.
+Crie um service de ClusterIP para o demoapp editando o arquivo demoapp-service.yml e, em seguida, aplique o arquivo do service.
 
-Create a Ingress for demoapp editing the demoapp-ingress.yml file, and then apply the ingress file.
+Crie um Ingress para o demoapp editando o arquivo demoapp-ingress.yml e, em seguida, aplique o arquivo do ingress.
 
-Test the application by opening a browser and accessing http://\<DEMOAPP_FQDN\>/demoapp.php. This application shows some information that will be useful for troubleshooting and visibility:
+Teste o aplicativo abrindo um navegador e acessando http://\<DEMOAPP_FQDN\>/demoapp.php. Este aplicativo mostra algumas informações que vão ser úteis para o diagnóstico de problemas e para a visibilidade:
 
-* The environment variables provided
-* The name of the pod running the container
-* A list of students added to the MySQL database being connected.
+* As variáveis de ambiente fornecidas.
+* O nome do pod que executa o container.
+* Uma lista de alunos adicionada ao banco de dados MySQL estando conectado.
 
-## Scale up the deployment
+## Escalando a implementação
 
-Edit the demoapp-deployment.yml file and change the replica amount from 1 to 3. Apply the file and:
+Edite o arquivo demoapp-deployment.yml e altere a quantidade de réplicas de 1 a 3. Aplique o arquivo e:
 
-* Check if the number of replicas changed using "kubectl get deployments"
-* Refresh the browser and check the Pod field. It should change to reflect from what pod the application is running from.
-* Check the pod names doing a "kubectl get pods" and check if the pod names are the same visible on the application.
+* Verifique se o número de réplicas mudou, usando "kubectl get deployments".
+* Atualize o navegador e verifique o campo do Pod. Ele deve mudar para refletir de qual pod o aplicativo está sendo executado.
+* Verifique os nomes dos pods executando “kubectl get pods” e verifique se os nomes dos pods correspondem aos que você vê no aplicativo.
 
-## Create a configMap for common configurations
+## Criando um configMap para configurações comuns
 
-ConfigMaps are useful to reuse the same configuration accross several pods and deployments. On demoapp, if several apps were running o the same cluster and the database server was always the same, would be interesting to centralize it configuration.
+Os ConfigMaps são úteis para reutilizar a mesma configuração em vários pods e implementações. No demoapp, se vários aplicativos estiverem sendo executados no mesmo cluster e se o servidor de banco de dados for sempre o mesmo, será interessante centralizar a configuração.
 
-Edit the demoapp-configmap.yml file and add the requested information about the databsae server on the file. Apply the file and check if the configmap is created:
+Edite o arquivo demoapp-configmap.yml e adicione as informações solicitadas sobre o servidor de banco de dados no arquivo. Aplique o arquivo e verifique se o configmap foi criado:
 
 ```bash
 kubectl get configmaps
 ```
 
-Edit the demoapp-deployment.yml and remove the environment variable DATABASE_SERVER and its value. Add the following under the container configuration (right below the image configuration):
+Edite o arquivo demoapp-deployment.yml e remova a variável de ambiente DATABASE_SERVER e o seu valor. Adicione o seguinte conteúdo abaixo da configuração do container (logo abaixo da configuração da imagem):
 
 ```yaml
         envFrom:
@@ -88,28 +88,28 @@ Edit the demoapp-deployment.yml and remove the environment variable DATABASE_SER
             name: <NAME OF THE CREATED SCONFIGMAP>
 ```
 
-Apply the configuration again and check if demoapp application still works, displaying the information from the MySQL database. If not check the deployment again or ask your instructor for assistance.
+Aplique a configuração de novo e verifique se o demoapp ainda funciona, exibindo as informações do banco de dados MySQL. Se não, verifique de novo a implementação ou peça ajuda ao seu instrutor / instrutora.
 
-## Create a Secret to store password
+## Criando um segredo para armazenar senhas
 
-Secrets are useful tools to hide sensitive information on Kbernetes. On demoapp, the DB password is stored as an environment variable, and it can be moved to a Secret.
+Os segredos são ferramentas úteis para ocultar informações confidenciais no Kubernetes. No demoapp, a senha do banco de dados é armazenada como uma variável de ambiente e pode ser movida para um segredo.
 
-In order to store a secret, it is needed to encode the DB password using base64 algorithm. Use the following command to do so:
+Para armazenar um segredo, você precisa codificar a senha do banco de dados usando o algoritmo base64. Para fazer isso, use o seguinte comando:
 
 ```bash
 printf '<PUT HERE THE DATABSAE PASSWORD>' | base64
 ```
 
-Copy the command output as the encoded password. Now, edit the demoapp-secret.yml file, adding the encoded password where indicated. Apply the file and check with "kubectl get secrets" if it is being listed.
+Copie o output como a senha codificada. Agora, edite o arquivo demoapp-secret.yml, adicionando a senha codificada onde for indicado. Aplique o arquivo e, com “kubectl get secrets”, verifique se ele está listado.
 
-Edit the demoapp-deployment file and add the following right below the name of the configMapRef added previously (inside the envFrom object):
+Edite o arquivo demoapp-deployment e adicione o seguinte comando logo abaixo do nome do configMapRef que você adicionou antes (dentro do objeto envFrom):
 
 ```yaml
         - secretRef:
             name: <NAME OF SECRET CONFIGURED>
 ```
 
-It should look like this:
+Deverá ficar assim:
 
 ```yaml
         envFrom:
@@ -120,13 +120,13 @@ It should look like this:
 
 ```
 
-Save and apply the file. test if the demoapp is still working correctly.
+Salve e aplique o arquivo. Teste se o demoapp ainda está funcionando de forma correta.
 
-## Using ConfigMaps to mount files within the pod
+## Usando ConfigMaps para montar arquivos dentro do pod
 
-Configmaps can be used to store any kind of information. On this task, a html file will be configured as a configmap and injected on the Pods as a volume.
+Os Configmaps podem ser usados para armazenar qualquer tipo de informação. Neste exercício, você vai configurar um arquivo html como um configmap injetado nos Pods como um volume.
 
-Create a HTML file named index.html on the Linux VM with any information you want. Example below:
+Crie um arquivo HTML chamado index.html na VM de Linux com a informação que você quiser. Confira o exemplo a seguir:
 
 ```html
 <!DOCTYPE html>
@@ -144,19 +144,19 @@ Will definitely recommend.
 </html>
 ```
 
-Create a configmap from the file created:
+Crie um configmap a partir do arquivo criado:
 
 ```bash
 kubectl create configmap demoapp-newindex-configmap --from-file ./index.html
 ```
 
-Check the configmap contents in YAML format
+Verifique o conteúdo do configmap no formato YAML:
 
 ```bash
 kubectl get configmap demoapp-newindex-configmap -o yaml
 ```
 
-Add the following right at the end of the demoapp-deployment.yml file:
+Adicione o seguinte conteúdo no final do arquivo demoapp-deployment.yml:
 
 ```yaml
         volumeMounts:
@@ -169,7 +169,7 @@ Add the following right at the end of the demoapp-deployment.yml file:
           name: demoapp-newindex-configmap
 ```
 
-* volumeMounts should be inside the "container:" object
-* volumes should be inside spec: (PodSpec).
+* volumeMounts deverá estar dentro do "container:" object
+* volumes deverá estar dentro do spec: (PodSpec).
 
-Apply the changed file and check if demoapp application is working ok. Then, try to access http://\<DEMOAPP_FQDN\>/ (with no demoapp.php on it) and check if your HTML file works.
+Aplique o arquivo alterado e verifique se o demoapp está funcionando de forma correta. Em seguida, tente acessar http://\<DEMOAPP_FQDN\>/ (sem nenhum demoapp.php nele) e verifique se o seu arquivo HTML funciona.
