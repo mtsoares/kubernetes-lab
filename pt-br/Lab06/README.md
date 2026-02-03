@@ -1,6 +1,6 @@
 # Lab 06
 
-Neste lab, vamos instalar no cluster uma solução de monitoramento baseada em Prometheus e Grafana e, em seguida, acessá-las externamente.
+Neste lab, vamos instalar uma solução de monitoramento baseada em Prometheus e Grafana no cluster. Em seguida, vamos acessá-las externamente.
 
 ## Preparação
 
@@ -90,7 +90,7 @@ Execute o seguinte comando para realizar a instalação:
 helm install rancher rancher-latest/rancher --namespace cattle-system --set hostname=<LAB_VM_FQDN> --set bootstrapPassword=admin123
 ```
 
-Aguarde até que todos os pods do Rancher estejam ativos, verificando com “kubectl get pods”. Isso pode demorar uns 20 minutos. Todos os pods devem estar no status “Successful” ou “Running”.
+Espere até que todos os pods do Rancher estejam ativos, verificando com “kubectl get pods”. Isso pode demorar uns 20 minutos. Todos os pods devem estar no status “Successful” ou “Running”.
 
 Em um navegador web, acesse https://\<LAB_VM_FQDN\> e forneça a seguinte senha de bootstrap: admin123 (fornecida no comando de instalação). Crie um nome de usuário e uma senha, faça login e verifique o cluster “local”:
 
