@@ -1,6 +1,6 @@
 # Lab 05
 
-Neste lab, vamos mostrar como administrar uma implementação de Kubernetes, criando e escalando um app chamado "demoapp".
+Neste lab, vamos conferir como administrar uma implementação de Kubernetes, criando e escalando um app chamado "demoapp".
 
 ## Preparação
 
@@ -28,13 +28,13 @@ kubectl create namespace demoapp
 kubectl config set-context --current --namespace=demoapp
 ```
 
-Como a imagem do demoapp está hospedada em um registro de container que não é Docker Hub, e que ela está protegida por autenticação via senha, você precisa informar explicitamente a qualquer pod as credenciais para fazer login. Para isso, use o seguinte comando para criar um segredo de registro do Docker:
+Como a imagem do demoapp está hospedada em um registro de container que não é Docker Hub, e dado que ela está protegida por autenticação via senha, você vai precisar informar explicitamente a qualquer pod as credenciais para fazer login. Para isso, use o seguinte comando para criar um segredo de registro do Docker:
 
 ```bash
 kubectl create secret docker-registry \<PROVIDE A NAME FOR THE SECRET\> --docker-server=\<DOCKER_REGISTRY_SERVER\> --docker-username=\<DOCKER_REGISTRY_USERNAME\> --docker-password=\<DOCKER_REGISTRY_PASSWORD\>
 ```
 
-Verifique se o segredo foi criado com "kubectl get secrets" e anote seu nome.
+Verifique se o segredo foi criado com "kubectl get secrets" e anote o seu nome.
 
 Mude para a pasta do Lab05 e edite o arquivo demoapp-deployment.yml:
 
@@ -52,7 +52,7 @@ kubectl get pods
 
 ## Habilitando o acesso externo ao demoapp
 
-Crie um service de ClusterIP para o demoapp editando o arquivo demoapp-service.yml e, em seguida, aplique o arquivo do service.
+Crie um service de ClusterIP para o demoapp editando o arquivo demoapp-service.yml. Em seguida, aplique o arquivo do service.
 
 Crie um Ingress para o demoapp editando o arquivo demoapp-ingress.yml e, em seguida, aplique o arquivo do ingress.
 
@@ -67,7 +67,7 @@ Teste o aplicativo abrindo um navegador e acessando http://\<DEMOAPP_FQDN\>/demo
 Edite o arquivo demoapp-deployment.yml e altere a quantidade de réplicas de 1 a 3. Aplique o arquivo e:
 
 * Verifique se o número de réplicas mudou, usando "kubectl get deployments".
-* Atualize o navegador e verifique o campo do Pod. Ele deve mudar para refletir de qual pod o aplicativo está sendo executado.
+* Atualize o navegador e verifique o campo do Pod. Ele deve mudar para mostrar de qual pod o aplicativo está sendo executado.
 * Verifique os nomes dos pods executando “kubectl get pods” e verifique se os nomes dos pods correspondem aos que você vê no aplicativo.
 
 ## Criando um configMap para configurações comuns
@@ -88,13 +88,13 @@ Edite o arquivo demoapp-deployment.yml e remova a variável de ambiente DATABASE
             name: <NAME OF THE CREATED SCONFIGMAP>
 ```
 
-Aplique a configuração de novo e verifique se o demoapp ainda funciona, exibindo as informações do banco de dados MySQL. Se não, verifique de novo a implementação ou peça ajuda ao seu instrutor / instrutora.
+Aplique a configuração de novo e verifique se o demoapp ainda funciona, mostrando as informações do banco de dados MySQL. Se não, verifique de novo a implementação ou peça ajuda ao seu instrutor / instrutora.
 
 ## Criando um segredo para armazenar senhas
 
 Os segredos são ferramentas úteis para ocultar informações confidenciais no Kubernetes. No demoapp, a senha do banco de dados é armazenada como uma variável de ambiente e pode ser movida para um segredo.
 
-Para armazenar um segredo, você precisa codificar a senha do banco de dados usando o algoritmo base64. Para fazer isso, use o seguinte comando:
+Para armazenar um segredo, você vai precisar codificar a senha do banco de dados usando o algoritmo base64. Para fazer isso, use o seguinte comando:
 
 ```bash
 printf '<PUT HERE THE DATABSAE PASSWORD>' | base64
